@@ -8,8 +8,14 @@ function renderResume(language) {
   if (!template) return;
 
   resume.replaceChildren(template.content.cloneNode(true));
-  document.documentElement.lang = language === "zh" ? "zh-Hant" : "en";
-  document.title = language === "zh" ? "Rex Ying 履歷" : "Rex Ying Resume";
+  const languageMeta = {
+    en: { lang: "en", title: "Rex Ying Resume" },
+    zh: { lang: "zh-Hant", title: "Rex Ying 履歷" },
+    ja: { lang: "ja", title: "Rex Ying 履歴書" },
+  }[language];
+
+  document.documentElement.lang = languageMeta.lang;
+  document.title = languageMeta.title;
   localStorage.setItem("resume-language", language);
 
   languageButtons.forEach((button) => {
@@ -24,4 +30,4 @@ languageButtons.forEach((button) => {
 printButton.addEventListener("click", () => window.print());
 
 const savedLanguage = localStorage.getItem("resume-language");
-renderResume(savedLanguage === "zh" ? "zh" : "en");
+renderResume(["en", "zh", "ja"].includes(savedLanguage) ? savedLanguage : "en");

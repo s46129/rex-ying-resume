@@ -423,6 +423,7 @@ h2 {
 .skills div { display: grid; grid-template-columns: 25mm 1fr; gap: 4mm; }
 .skills dt { color: var(--ink); font-size: 8.2pt; font-weight: 700; }
 .skills dd { margin: 0; color: #4d4d4d; font-size: 8.1pt; }
+html[lang="ja"] .skills div { grid-template-columns: 36mm 1fr; }
 .education-copy { margin-top: 1.5mm; color: var(--muted); font-size: 8.3pt; }
 
 .page-footer {
