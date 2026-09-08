@@ -137,7 +137,9 @@ h1 {
 
 .contact {
   display: grid;
+  justify-items: end;
   gap: 1.4mm;
+  width: 45mm;
   min-width: 45mm;
   color: var(--muted);
   font-size: 8.3pt;
@@ -152,13 +154,22 @@ h1 {
   display: grid;
   justify-items: end;
   gap: 1mm;
+  width: 18mm;
+  min-width: 18mm;
+  max-width: 18mm;
   margin-top: 1.8mm;
+  justify-self: end;
+  overflow: hidden;
 }
 
-.resume-qr img {
+.contact .resume-qr img {
   display: block;
   width: 18mm;
+  min-width: 18mm;
+  max-width: 18mm;
   height: 18mm;
+  max-height: 18mm;
+  object-fit: contain;
   image-rendering: pixelated;
 }
 
@@ -381,8 +392,8 @@ h2 {
   .page { width: calc(100vw - 20px); min-height: auto; padding: 28px 24px 50px; }
   .page-one, .page-two, .page-three { gap: 34px; }
   .hero, .summary, .company-row, .bottom-grid { grid-template-columns: 1fr; }
-  .contact { text-align: left; }
-  .resume-qr { justify-items: start; }
+  .contact { width: 100%; min-width: 0; justify-items: start; text-align: left; }
+  .resume-qr { justify-self: start; justify-items: start; }
   .two-column-list { columns: 1; }
   .project-body { grid-template-columns: 1fr; }
   .mini-project-list article { grid-template-columns: 1fr; gap: 0; }
