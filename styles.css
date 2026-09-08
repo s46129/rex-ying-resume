@@ -182,8 +182,10 @@ h1 {
 }
 
 .resume-qr span {
+  width: 100%;
   font-size: 6.8pt;
   font-weight: 650;
+  text-align: center;
 }
 
 .summary {
@@ -340,8 +342,8 @@ h2 {
 
 .bottom-grid {
   display: grid;
-  grid-template-columns: 1.55fr 1fr;
-  gap: 13mm;
+  grid-template-columns: 1fr;
+  gap: 8mm;
   margin-top: 5mm;
   padding-top: 8mm;
   border-top: 1px solid var(--ink);
