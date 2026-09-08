@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rex Ying Resume</title>
+    <meta
+      name="description"
+      content="Resume for Rex Ying, Unity Technical Lead and Senior Unity Engineer."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="screen-toolbar">
+      <strong>Rex Ying Resume</strong>
+      <div class="toolbar-actions">
+        <div class="language-switch" role="group" aria-label="Language">
+          <button type="button" data-language="en" aria-pressed="true">EN</button>
+          <button type="button" data-language="zh" aria-pressed="false">中文</button>
+        </div>
+        <button class="print-button" type="button" data-print>Print / PDF</button>
+      </div>
+    </header>
+
+    <main id="resume" class="resume" aria-live="polite"></main>
+
+    <noscript>
+      <p class="noscript-message">Please enable JavaScript to display the resume.</p>
+    </noscript>
+
+    <template id="resume-en">
+      <section class="page page-one" aria-label="Resume page 1">
+        <header class="hero">
+          <div class="identity">
+            <p class="eyebrow">Unity Technical Lead / Senior Unity Engineer</p>
+            <h1>Rex Ying</h1>
+            <p class="tagline">Game systems / Architecture / XR / Multiplayer</p>
+          </div>
+          <address class="contact">
+            <span>Kaohsiung, Taiwan</span>
+            <a href="mailto:ted56129@gmail.com">ted56129@gmail.com</a>
+            <a href="https://github.com/s46129">github.com/s46129</a>
+          </address>
+        </header>
+
+        <section class="summary section-block">
+          <p class="section-label">Profile</p>
+          <p class="summary-copy">
+            Unity engineer and technical lead with 8+ years of experience taking
+            games and interactive installations from early technical planning
+            through release. My work spans Nintendo Switch, location-based VR,
+            mobile AR, and multiplayer systems. I currently lead a Unity team
+            while continuing to design architecture and implement core systems.
+          </p>
+        </section>
+
+        <section class="experience section-block">
+          <div class="section-heading">
+            <div>
+              <h2>Experience</h2>
+            </div>
+          </div>
+
+          <div class="company-row">
+            <div class="company-name">
+              <h3>WOWWOW Technology Co., Ltd.</h3>
+              <p>Kaohsiung, Taiwan</p>
+            </div>
+            <ol class="career-path">
+              <li><strong>CTO</strong><span>2024 – Present</span></li>
+              <li><strong>Technical Lead</strong><span>2022 – 2024</span></li>
+              <li><strong>Senior Unity Engineer</strong><span>2021 – 2022</span></li>
+              <li><strong>Unity Engineer</strong><span>2018 – 2021</span></li>
+              <li><strong>3D Artist</strong><span>2017 – 2018</span></li>
+            </ol>
+          </div>
+
+          <ul class="achievement-list two-column-list">
+            <li>Lead architecture and technical decisions for games, XR experiences, interactive installations, and cross-platform applications.</li>
+            <li>Manage a Unity team of 4, previously up to 7, covering project planning, work allocation, and technical mentoring.</li>
+            <li>Turn ambiguous client needs into feasible system designs, implementation plans, and acceptance criteria.</li>
+            <li>Build reusable Unity packages for authentication, VR safety, venue mapping, and photography workflows.</li>
+          </ul>
+        </section>
+
+        <section class="projects section-block">
+          <div class="section-heading">
+            <div>
+              <h2>Selected Work</h2>
+            </div>
+          </div>
+
+          <article class="project flagship">
+            <div class="project-head">
+              <div>
+                <h3>BIRDIE WING -Golf Girls' Story-</h3>
+                <p class="project-meta">Nintendo Switch / Tech Lead / Japanese IP</p>
+              </div>
+            </div>
+            <div class="project-body">
+              <figure class="project-visual">
+                <img src="assets/birdie-wing-gameplay.jpg" alt="BIRDIE WING golf gameplay with trajectory preview" />
+                <figcaption>Gameplay capture showing the trajectory preview system.</figcaption>
+              </figure>
+              <ul class="achievement-list">
+                <li>Led engineering within a ~16-person team, owning schedules and engineer assignments while defining art asset handoff requirements.</li>
+                <li>Served as technical liaison with the Japanese animation IP partner, presenting weekly progress and coordinating approvals for 3D character adaptation, animation direction, and game content.</li>
+                <li>Designed golf-ball physics, trajectory prediction, game-flow architecture, and character dialogue systems.</li>
+                <li>Optimized grass rendering for Switch hardware and integrated eShop and DLC asset-unlocking features.</li>
+              </ul>
+            </div>
+          </article>
+        </section>
+
+        <footer class="page-footer"><span>Rex Ying</span><span>01 / 03</span></footer>
+      </section>
+
+      <section class="page page-two" aria-label="Resume page 2">
+        <section class="projects section-block">
+          <div class="section-heading page-two-heading">
+            <div>
+              <h2>Selected Work</h2>
+            </div>
+          </div>
+
+          <article class="project">
+            <div class="project-head">
+              <div>
+                <h3>Monster Fruit Academy</h3>
+                <p class="project-meta">Nintendo Switch / Tech Lead / Taiwanese animation IP</p>
+              </div>
+            </div>
+            <div class="project-body">
+              <figure class="project-visual">
+                <img src="assets/taiwan-monster-fruit-gameplay.png" alt="Taiwan Monster Fruit boss battle gameplay" />
+                <figcaption>Boss encounter designed from concept through implementation.</figcaption>
+              </figure>
+              <ul class="achievement-list">
+                <li>Led technical development for a ~12-person team, owning gameplay systems and key product decisions.</li>
+                <li>Built a level editor that let planners configure stages, enemies, and spawn layouts independently.</li>
+                <li>Designed independently selectable subtitle and voice systems, with Timeline preview and external localization workflows.</li>
+                <li>Owned core game systems and designed a multi-phase boss encounter that shifted runner gameplay into bullet hell.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <div>
+                <h3>Welcome to PILI Universe</h3>
+                <p class="project-meta">Location-based VR / Multiplayer systems / Renowned Taiwanese IP</p>
+              </div>
+            </div>
+            <div class="project-body">
+              <figure class="project-visual">
+                <img src="assets/pili-universe-gameplay.png" alt="PILI Universe multiplayer VR gameplay with ghost avatars" />
+                <figcaption>Shared venue view with players from separate groups.</figcaption>
+              </figure>
+              <ul class="achievement-list">
+                <li>Designed a multi-group architecture for ~50 concurrent users in independent groups sharing one physical venue.</li>
+                <li>Built separate coordination layers for within-group gameplay and cross-group position awareness.</li>
+                <li>Visualized nearby players from other groups as ghost avatars to reduce physical collision risk.</li>
+                <li>Reduced group admission intervals from ~25 to 5 minutes and packaged the infrastructure as reusable SDK-style modules.</li>
+              </ul>
+            </div>
+          </article>
+        </section>
+
+        <footer class="page-footer"><span>Rex Ying</span><span>02 / 03</span></footer>
+      </section>
+
+      <section class="page page-three" aria-label="Resume page 3">
+
+        <section class="additional-work section-block">
+          <div class="section-heading">
+            <div>
+              <h2>Additional Work</h2>
+            </div>
+          </div>
+
+          <div class="mini-project-list">
+            <article>
+              <h3>ケロロ軍曹 超共鳴展限定アプリ であります！</h3>
+              <p class="project-meta">iOS / Android · AR · AI Integration</p>
+              <p>Technical liaison for a Japanese IP exhibition app combining AR photography, AI-triggered web content, and iBeacon access with QR fallback.</p>
+            </article>
+            <article>
+              <h3>Kaohsiung Municipal Gangshan Hospital Interactive Kiosk</h3>
+              <p class="project-meta">Windows · Kinect · Touchless Interaction</p>
+              <p>Integrated and deployed a touchless children's game, mapping head and hand movement to gameplay and owning on-site delivery.</p>
+            </article>
+            <article>
+              <h3>Grandma Fruity's Secret</h3>
+              <p class="project-meta">iOS / Android · Mobile AR · Product Owner</p>
+              <p>Owned a three-person Public Television Service IP project from client communication through implementation and store release.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="bottom-grid section-block">
+          <section>
+            <div class="section-heading compact-heading">
+              <div><h2>Expertise</h2></div>
+            </div>
+            <dl class="skills">
+              <div><dt>Game development</dt><dd>Unity · C# · Gameplay systems · Physics · Rendering optimization · Custom editor tools</dd></div>
+              <div><dt>XR &amp; spatial</dt><dd>OpenXR · Meta XR · VIVE · AR Foundation · Vuforia · ARKit · Kinect · Infrared touch interfaces</dd></div>
+              <div><dt>Multiplayer &amp; integration</dt><dd>Unity Netcode for GameObjects · Socket.IO · WebSocket · MQTT · OSC · Firebase</dd></div>
+              <div><dt>Platforms &amp; release</dt><dd>Nintendo Switch · Windows · iOS · Android · Nintendo submission · App Store · Google Play</dd></div>
+            </dl>
+          </section>
+          <section>
+            <div class="section-heading compact-heading">
+              <div><h2>Education</h2></div>
+            </div>
+            <h3>National Ilan University</h3>
+            <p class="education-copy">B.S. in Mechanical and Electro-Mechanical Engineering · 2015</p>
+          </section>
+        </section>
+
+        <footer class="page-footer"><span>Rex Ying</span><span>03 / 03</span></footer>
+      </section>
+    </template>
+
+    <template id="resume-zh">
+      <section class="page page-one" aria-label="履歷第 1 頁">
+        <header class="hero">
+          <div class="identity">
+            <p class="eyebrow">Unity 技術主管 / 資深 Unity 工程師</p>
+            <h1>英智淵</h1>
+            <p class="tagline">遊戲系統 / 軟體架構 / XR / 多人連線</p>
+          </div>
+          <address class="contact">
+            <span>台灣，高雄</span>
+            <a href="mailto:ted56129@gmail.com">ted56129@gmail.com</a>
+            <a href="https://github.com/s46129">github.com/s46129</a>
+          </address>
+        </header>
+
+        <section class="summary section-block">
+          <p class="section-label">專業摘要</p>
+          <p class="summary-copy">
+            擁有 8 年以上 Unity 商業開發經驗，曾將 Nintendo Switch 遊戲、走動式 VR 與行動 AR 產品從技術規劃推進至正式上線。目前帶領 Unity 團隊，同時持續參與架構設計與核心系統實作。
+          </p>
+        </section>
+
+        <section class="experience section-block">
+          <div class="section-heading">
+            <div><h2>工作經歷</h2></div>
+          </div>
+
+          <div class="company-row">
+            <div class="company-name">
+              <h3>哇哇科技股份有限公司</h3>
+              <p>台灣，高雄</p>
+            </div>
+            <ol class="career-path">
+              <li><strong>CTO</strong><span>2024 – 至今</span></li>
+              <li><strong>Technical Lead</strong><span>2022 – 2024</span></li>
+              <li><strong>Senior Unity Engineer</strong><span>2021 – 2022</span></li>
+              <li><strong>Unity Engineer</strong><span>2018 – 2021</span></li>
+              <li><strong>3D Artist</strong><span>2017 – 2018</span></li>
+            </ol>
+          </div>
+
+          <ul class="achievement-list two-column-list">
+            <li>主導遊戲、XR、互動裝置與跨平台應用的架構設計及技術決策。</li>
+            <li>管理 4 人 Unity 團隊，過去最高 7 人，負責專案規劃、工作分配與技術指導。</li>
+            <li>將客戶模糊需求收斂為可行的系統設計、實作計畫與驗收條件。</li>
+            <li>建立登入、VR 防碰撞、場域繪製及拍照流程等可重用 Unity 套件。</li>
+          </ul>
+        </section>
+
+        <section class="projects section-block">
+          <div class="section-heading">
+            <div><h2>代表作品</h2></div>
+          </div>
+
+          <article class="project flagship">
+            <div class="project-head">
+              <div>
+                <h3>BIRDIE WING -Golf Girls' Story-</h3>
+                <p class="project-meta">Nintendo Switch / Tech Lead / 日本動畫 IP</p>
+              </div>
+            </div>
+            <div class="project-body">
+              <figure class="project-visual">
+                <img src="assets/birdie-wing-gameplay.jpg" alt="BIRDIE WING 擊球與軌跡預測畫面" />
+                <figcaption>實際遊戲畫面，可見擊球軌跡預測系統。</figcaption>
+              </figure>
+              <ul class="achievement-list">
+                <li>帶領約 16 人跨職能團隊，負責工程分工與開發排程，並協調美術資產的交付規格。</li>
+                <li>擔任日方動畫 IP 合作的技術窗口，每週展示開發進度，確認角色 3D 化、動畫演出與遊戲內容。</li>
+                <li>設計並實作高爾夫球物理、落點預測、Game Flow 架構與角色對話系統。</li>
+                <li>針對 Switch 硬體優化草皮渲染，並完成 eShop 與 DLC 資產解鎖功能。</li>
+              </ul>
+            </div>
+          </article>
+        </section>
+
+        <footer class="page-footer"><span>英智淵</span><span>01 / 03</span></footer>
+      </section>
+
+      <section class="page page-two" aria-label="履歷第 2 頁">
+        <section class="projects section-block">
+          <div class="section-heading page-two-heading">
+            <div><h2>代表作品</h2></div>
+          </div>
+
+          <article class="project">
+            <div class="project-head">
+              <div>
+                <h3>妖果小學</h3>
+                <p class="project-meta">Nintendo Switch / Tech Lead / 台灣動畫 IP</p>
+              </div>
+            </div>
+            <div class="project-body">
+              <figure class="project-visual">
+                <img src="assets/taiwan-monster-fruit-gameplay.png" alt="妖果小學 Boss 戰遊戲畫面" />
+                <figcaption>從企劃發想到程式實作完成的 Boss 戰。</figcaption>
+              </figure>
+              <ul class="achievement-list">
+                <li>主導約 12 人跨職能團隊的技術開發，負責遊戲系統與關鍵產品決策。</li>
+                <li>製作關卡編輯器，讓企劃可自行設定 Stage、敵人種類與生成位置。</li>
+                <li>將字幕與語音獨立抽象化，搭配 Timeline 預覽及外部翻譯工作流程。</li>
+                <li>設計核心遊戲系統，並從企劃到實作完成由跑酷轉為彈幕射擊的多階段 Boss 關卡。</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <div>
+                <h3>歡迎來到霹靂宇宙大戲院</h3>
+                <p class="project-meta">走動式 VR / 多人連線系統 / 台灣知名 IP</p>
+              </div>
+            </div>
+            <div class="project-body">
+              <figure class="project-visual">
+                <img src="assets/pili-universe-gameplay.png" alt="霹靂宇宙大戲院多人 VR 與透明玩家畫面" />
+                <figcaption>共享場域中，不同群組的玩家彼此可見。</figcaption>
+              </figure>
+              <ul class="achievement-list">
+                <li>設計多群組架構，讓約 50 名玩家在共享實體場域中，以不同群組獨立遊玩。</li>
+                <li>建立組內遊戲同步與跨組位置協調機制，讓各群組獨立遊玩時仍能感知場域中的其他玩家。</li>
+                <li>將鄰近的跨組玩家顯示為透明虛擬人，降低共享空間中的實體碰撞風險。</li>
+                <li>將每組入場間隔由約 25 分鐘縮短至 5 分鐘，並把場域系統封裝為可重用 SDK 模組。</li>
+              </ul>
+            </div>
+          </article>
+        </section>
+
+        <footer class="page-footer"><span>英智淵</span><span>02 / 03</span></footer>
+      </section>
+
+      <section class="page page-three" aria-label="履歷第 3 頁">
+
+        <section class="additional-work section-block">
+          <div class="section-heading">
+            <div><h2>其他商業作品</h2></div>
+          </div>
+
+          <div class="mini-project-list">
+            <article>
+              <h3>ケロロ軍曹 超共鳴展限定アプリ であります！</h3>
+              <p class="project-meta">iOS / Android · AR · AI 整合</p>
+              <p>擔任日本 IP 展場 App 技術窗口，整合 AR 拍照、AI 回覆觸發網頁內容，以及 iBeacon 現場解鎖與 QR Code 備案。</p>
+            </article>
+            <article>
+              <h3>高醫岡山醫院互動健康小尖兵機台</h3>
+              <p class="project-meta">Windows · Kinect · 零接觸互動</p>
+              <p>整合並部署兒童候診區零接觸遊戲，將頭部與手部動作轉換為遊戲操作，並負責現場交付。</p>
+            </article>
+            <article>
+              <h3>水果奶奶的大秘密</h3>
+              <p class="project-meta">iOS / Android · Mobile AR · 產品負責人</p>
+              <p>帶領 3 人完成公共電視 IP 專案，負責客戶溝通、AR 方塊體驗實作及雙平台商店上架。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="bottom-grid section-block">
+          <section>
+            <div class="section-heading compact-heading">
+              <div><h2>技術能力</h2></div>
+            </div>
+            <dl class="skills">
+              <div><dt>遊戲開發</dt><dd>Unity · C# · 遊戲系統 · 物理模擬 · 渲染效能優化 · 自製編輯工具</dd></div>
+              <div><dt>XR 與空間互動</dt><dd>OpenXR · Meta XR · VIVE · AR Foundation · Vuforia · ARKit · Kinect · 紅外線觸控介接</dd></div>
+              <div><dt>多人與系統整合</dt><dd>Unity Netcode for GameObjects · Socket.IO · WebSocket · MQTT · OSC · Firebase</dd></div>
+              <div><dt>平台與發行</dt><dd>Nintendo Switch · Windows · iOS · Android · Nintendo 審查 · App Store · Google Play</dd></div>
+            </dl>
+          </section>
+          <section>
+            <div class="section-heading compact-heading">
+              <div><h2>學歷</h2></div>
+            </div>
+            <h3>國立宜蘭大學</h3>
+            <p class="education-copy">機械與機電工程學系 學士 · 2015</p>
+          </section>
+        </section>
+
+        <footer class="page-footer"><span>英智淵</span><span>03 / 03</span></footer>
+      </section>
+    </template>
+  </body>
+</html>
