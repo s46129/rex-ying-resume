@@ -55,7 +55,7 @@ button { font: inherit; }
 .language-switch {
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 999px;
 }
 
 .language-switch button,
@@ -86,7 +86,7 @@ button { font: inherit; }
   padding: 7px 14px;
   color: #fff;
   background: var(--accent);
-  border-radius: 6px;
+  border-radius: 999px;
   font-weight: 700;
 }
 
