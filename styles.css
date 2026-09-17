@@ -737,3 +737,4 @@ html:has(.video-dialog[open]) { overflow: hidden; }
   html[lang="en"] .page-one { gap: 7mm; }
   html[lang="en"] .page-one .hero { padding-bottom: 5mm; }
 }
+.project-intro { margin-top: 3mm; color: var(--muted); font-size: 8pt; line-height: 1.5; }
