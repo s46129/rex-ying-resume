@@ -26,6 +26,26 @@
 
     <main id="resume" class="resume" aria-live="polite"></main>
 
+    <dialog class="lightbox" aria-labelledby="lightbox-title">
+      <button class="lightbox-button lightbox-close" type="button" data-lightbox-close aria-label="Close" autofocus>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+      <figure class="lightbox-figure">
+        <img class="lightbox-image" alt="" />
+        <figcaption class="lightbox-caption">
+          <strong id="lightbox-title"></strong>
+          <span data-lightbox-text></span>
+          <span class="lightbox-counter" data-lightbox-counter></span>
+        </figcaption>
+      </figure>
+      <button class="lightbox-button lightbox-nav lightbox-prev" type="button" data-lightbox-step="-1" aria-label="Previous image">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+      </button>
+      <button class="lightbox-button lightbox-nav lightbox-next" type="button" data-lightbox-step="1" aria-label="Next image">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+      </button>
+    </dialog>
+
     <noscript>
       <p class="noscript-message">Please enable JavaScript to display the resume.</p>
     </noscript>
@@ -105,7 +125,9 @@
             </div>
             <div class="project-body">
               <figure class="project-visual">
-                <img src="assets/birdie-wing-gameplay.jpg" alt="BIRDIE WING golf gameplay with trajectory preview" />
+                <button class="visual-trigger" type="button" aria-haspopup="dialog">
+                  <img src="assets/birdie-wing-gameplay-960.webp" data-full="assets/birdie-wing-gameplay-full.webp" alt="BIRDIE WING golf gameplay with trajectory preview" width="960" height="540" decoding="async" />
+                </button>
                 <figcaption>Gameplay capture showing the trajectory preview system.</figcaption>
               </figure>
               <ul class="achievement-list">
@@ -138,7 +160,9 @@
             </div>
             <div class="project-body">
               <figure class="project-visual">
-                <img src="assets/pili-universe-gameplay.png" alt="PILI Universe multiplayer VR gameplay with ghost avatars" />
+                <button class="visual-trigger" type="button" aria-haspopup="dialog">
+                  <img src="assets/pili-universe-gameplay-960.webp" data-full="assets/pili-universe-gameplay-full.webp" alt="PILI Universe multiplayer VR gameplay with ghost avatars" width="960" height="540" loading="lazy" decoding="async" />
+                </button>
                 <figcaption>Shared venue view with players from separate groups.</figcaption>
               </figure>
               <ul class="achievement-list">
@@ -159,7 +183,9 @@
             </div>
             <div class="project-body">
               <figure class="project-visual">
-                <img src="assets/taiwan-monster-fruit-gameplay.png" alt="Monster Fruit Academy boss battle gameplay" />
+                <button class="visual-trigger" type="button" aria-haspopup="dialog">
+                  <img src="assets/taiwan-monster-fruit-gameplay-960.webp" data-full="assets/taiwan-monster-fruit-gameplay-full.webp" alt="Monster Fruit Academy boss battle gameplay" width="960" height="540" loading="lazy" decoding="async" />
+                </button>
                 <figcaption>Boss encounter designed from concept through implementation.</figcaption>
               </figure>
               <ul class="achievement-list">
@@ -296,7 +322,9 @@
             </div>
             <div class="project-body">
               <figure class="project-visual">
-                <img src="assets/birdie-wing-gameplay.jpg" alt="BIRDIE WING 擊球與軌跡預測畫面" />
+                <button class="visual-trigger" type="button" aria-haspopup="dialog">
+                  <img src="assets/birdie-wing-gameplay-960.webp" data-full="assets/birdie-wing-gameplay-full.webp" alt="BIRDIE WING 擊球與軌跡預測畫面" width="960" height="540" decoding="async" />
+                </button>
                 <figcaption>實際遊戲畫面，可見擊球軌跡預測系統。</figcaption>
               </figure>
               <ul class="achievement-list">
@@ -327,7 +355,9 @@
             </div>
             <div class="project-body">
               <figure class="project-visual">
-                <img src="assets/pili-universe-gameplay.png" alt="霹靂宇宙大戲院多人 VR 與透明玩家畫面" />
+                <button class="visual-trigger" type="button" aria-haspopup="dialog">
+                  <img src="assets/pili-universe-gameplay-960.webp" data-full="assets/pili-universe-gameplay-full.webp" alt="霹靂宇宙大戲院多人 VR 與透明玩家畫面" width="960" height="540" loading="lazy" decoding="async" />
+                </button>
                 <figcaption>場域中，不同群組的玩家彼此可見。</figcaption>
               </figure>
               <ul class="achievement-list">
@@ -348,7 +378,9 @@
             </div>
             <div class="project-body">
               <figure class="project-visual">
-                <img src="assets/taiwan-monster-fruit-gameplay.png" alt="妖果小學 Boss 戰遊戲畫面" />
+                <button class="visual-trigger" type="button" aria-haspopup="dialog">
+                  <img src="assets/taiwan-monster-fruit-gameplay-960.webp" data-full="assets/taiwan-monster-fruit-gameplay-full.webp" alt="妖果小學 Boss 戰遊戲畫面" width="960" height="540" loading="lazy" decoding="async" />
+                </button>
                 <figcaption>從企劃發想到程式實作完成的 Boss 戰。</figcaption>
               </figure>
               <ul class="achievement-list">
@@ -483,7 +515,9 @@
             </div>
             <div class="project-body">
               <figure class="project-visual">
-                <img src="assets/birdie-wing-gameplay.jpg" alt="BIRDIE WINGのショットおよび弾道予測画面" />
+                <button class="visual-trigger" type="button" aria-haspopup="dialog">
+                  <img src="assets/birdie-wing-gameplay-960.webp" data-full="assets/birdie-wing-gameplay-full.webp" alt="BIRDIE WINGのショットおよび弾道予測画面" width="960" height="540" decoding="async" />
+                </button>
                 <figcaption>弾道予測システムを表示した実際のゲーム画面。</figcaption>
               </figure>
               <ul class="achievement-list">
@@ -514,7 +548,9 @@
             </div>
             <div class="project-body">
               <figure class="project-visual">
-                <img src="assets/pili-universe-gameplay.png" alt="PILI UniverseのマルチプレイVRおよび半透明プレイヤー表示" />
+                <button class="visual-trigger" type="button" aria-haspopup="dialog">
+                  <img src="assets/pili-universe-gameplay-960.webp" data-full="assets/pili-universe-gameplay-full.webp" alt="PILI UniverseのマルチプレイVRおよび半透明プレイヤー表示" width="960" height="540" loading="lazy" decoding="async" />
+                </button>
                 <figcaption>同一会場内で、別グループのプレイヤーも確認可能。</figcaption>
               </figure>
               <ul class="achievement-list">
@@ -535,7 +571,9 @@
             </div>
             <div class="project-body">
               <figure class="project-visual">
-                <img src="assets/taiwan-monster-fruit-gameplay.png" alt="Monster Fruit Academyのボス戦画面" />
+                <button class="visual-trigger" type="button" aria-haspopup="dialog">
+                  <img src="assets/taiwan-monster-fruit-gameplay-960.webp" data-full="assets/taiwan-monster-fruit-gameplay-full.webp" alt="Monster Fruit Academyのボス戦画面" width="960" height="540" loading="lazy" decoding="async" />
+                </button>
                 <figcaption>企画から実装まで担当したボス戦。</figcaption>
               </figure>
               <ul class="achievement-list">

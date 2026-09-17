@@ -29,8 +29,10 @@ python3 -m http.server 8000
 | --- | --- |
 | `index.html` | 中英日文履歷內容與頁面結構 |
 | `styles.css` | 螢幕、響應式與列印樣式 |
-| `script.js` | 語言切換、偏好記錄與列印操作 |
+| `script.js` | 語言切換、偏好記錄、作品圖燈箱、捲動進場與列印操作 |
 | `assets/` | 專案圖片與線上履歷 QR Code |
+
+新增作品圖時，每張需準備兩個 WebP：`<name>-960.webp`（960×540 縮圖）與 `<name>-full.webp`（原始解析度，供燈箱使用），並在 `<img>` 的 `data-full` 指向大圖。
 
 修改履歷內容時，請同步檢查中英文兩份 `<template>`。列印前建議先在瀏覽器切換至目標語言，再點選頁面右上角的 **Print / PDF**。
 
