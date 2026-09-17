@@ -677,8 +677,9 @@ html[lang="ja"] .skills div { grid-template-columns: 36mm 1fr; }
 .project-media img { object-fit: contain; }
 .project-media figcaption { text-align: center; font-size: 6.5pt; }
 .mini-project-copy > p:not(.project-meta) { margin-top: 2mm; font-size: 8.5pt; line-height: 1.5; }
-.video-link { display: inline-block; margin-top: 2mm; color: var(--accent-deep); font-size: 8pt; text-underline-offset: 3px; }
-.video-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.video-link, .official-app-link { display: inline-block; margin-top: 2mm; color: var(--accent-deep); font-size: 8pt; text-underline-offset: 3px; }
+.video-link:focus-visible, .official-app-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.mini-project-list .text-project { grid-template-columns: 1fr; }
 .page-three { gap: 5mm; }
 .page-three .bottom-grid { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 7mm; margin-top: 0; padding-top: 4mm; }
 .page-three .skills { gap: 2.5mm; }

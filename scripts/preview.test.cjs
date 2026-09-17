@@ -13,7 +13,7 @@ test("video preview serves seekable byte ranges", async () => {
       server.once("error", reject);
       server.once("exit", code => reject(new Error(`Server exited: ${code}`)));
     });
-    const name = "assets/keroro-exhibition/ai-demo-web.mp4";
+    const name = "assets/grandma-fruity-secret/app-demo-web.mp4";
     const source = fs.readFileSync(path.join(__dirname, "..", name));
     const url = `http://127.0.0.1:${port}/${name}`;
     for (const [range, start, end] of [["bytes=0-99", 0, 99], ["bytes=100-199", 100, 199], ["bytes=-100", source.length - 100, source.length - 1]]) {
