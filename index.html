@@ -46,6 +46,19 @@
       </button>
     </dialog>
 
+    <dialog class="video-dialog" aria-labelledby="video-title">
+      <div class="video-heading"><h2 id="video-title"></h2><button class="video-icon-button" type="button" data-video-close aria-label="Close" title="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg></button></div>
+      <video playsinline preload="metadata" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback"></video>
+      <div class="video-controls">
+        <button class="video-icon-button" type="button" data-video-play aria-label="Play" title="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="video-play-icon" d="M9 5l11 7-11 7z" /><path class="video-pause-icon" d="M8 5v14M16 5v14" /></svg></button>
+        <input type="range" data-video-seek min="0" max="100" step="0.1" value="0" aria-label="Seek" disabled />
+        <output data-video-time>0:00 / 0:00</output>
+        <button class="video-icon-button" type="button" data-video-mute aria-label="Mute" title="Mute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4z" /><path class="video-sound-icon" d="M15 8a6 6 0 010 8M18 5a10 10 0 010 14" /><path class="video-muted-icon" d="M16 9l5 6M21 9l-5 6" /></svg></button>
+        <input type="range" data-video-volume min="0" max="1" step="0.05" value="1" aria-label="Volume" />
+      </div>
+      <p class="video-status" role="status"></p>
+    </dialog>
+
     <noscript>
       <p class="noscript-message">Please enable JavaScript to display the resume.</p>
     </noscript>
@@ -126,7 +139,7 @@
             <div class="project-body">
               <figure class="project-visual">
                 <button class="visual-trigger" type="button" aria-haspopup="dialog">
-                  <img src="assets/birdie-wing-gameplay-960.webp" data-full="assets/birdie-wing-gameplay-full.webp" alt="BIRDIE WING golf gameplay with trajectory preview" width="960" height="540" decoding="async" />
+                  <img src="assets/birdie-wing/gameplay-960.webp" data-full="assets/birdie-wing/gameplay-full.webp" alt="BIRDIE WING golf gameplay with trajectory preview" width="960" height="540" decoding="async" />
                 </button>
                 <figcaption>Gameplay capture showing the trajectory preview system.</figcaption>
               </figure>
@@ -161,7 +174,7 @@
             <div class="project-body">
               <figure class="project-visual">
                 <button class="visual-trigger" type="button" aria-haspopup="dialog">
-                  <img src="assets/pili-universe-gameplay-960.webp" data-full="assets/pili-universe-gameplay-full.webp" alt="PILI Universe multiplayer VR gameplay with ghost avatars" width="960" height="540" loading="lazy" decoding="async" />
+                  <img src="assets/pili-universe/gameplay-960.webp" data-full="assets/pili-universe/gameplay-full.webp" alt="PILI Universe multiplayer VR gameplay with ghost avatars" width="960" height="540" loading="lazy" decoding="async" />
                 </button>
                 <figcaption>Shared venue view with players from separate groups.</figcaption>
               </figure>
@@ -184,7 +197,7 @@
             <div class="project-body">
               <figure class="project-visual">
                 <button class="visual-trigger" type="button" aria-haspopup="dialog">
-                  <img src="assets/taiwan-monster-fruit-gameplay-960.webp" data-full="assets/taiwan-monster-fruit-gameplay-full.webp" alt="Monster Fruit Academy boss battle gameplay" width="960" height="540" loading="lazy" decoding="async" />
+                  <img src="assets/taiwan-monster-fruit/gameplay-960.webp" data-full="assets/taiwan-monster-fruit/gameplay-full.webp" alt="Monster Fruit Academy boss battle gameplay" width="960" height="540" loading="lazy" decoding="async" />
                 </button>
                 <figcaption>Boss encounter designed from concept through implementation.</figcaption>
               </figure>
@@ -211,20 +224,29 @@
           </div>
 
           <div class="mini-project-list">
-            <article>
-              <h3>ケロロ軍曹 超共鳴展限定アプリ であります！</h3>
+            <article class="media-project">
+              <div class="project-media"><figure class="project-visual"><button class="visual-trigger" type="button" aria-haspopup="dialog"><img src="assets/keroro-exhibition/ar-interface-thumb.webp" data-full="assets/keroro-exhibition/ar-interface-large.webp" alt="AR photography interface" width="591" height="1280" loading="lazy" decoding="async" /></button><figcaption>AR photography interface</figcaption></figure><figure class="project-visual"><button class="visual-trigger" type="button" aria-haspopup="dialog"><img src="assets/keroro-exhibition/ai-character-interface-thumb.webp" data-full="assets/keroro-exhibition/ai-character-interface-large.webp" alt="AI character interaction" width="591" height="1280" loading="lazy" decoding="async" /></button><figcaption>AI character interaction</figcaption></figure></div>
+              <div class="mini-project-copy"><h3>ケロロ軍曹 超共鳴展限定アプリ であります！</h3>
               <p class="project-meta">iOS / Android · AR · AI Integration</p>
               <p>Technical liaison for a Japanese IP exhibition app combining AR photography, AI-triggered web content, and iBeacon access with QR fallback.</p>
+                <a class="video-link" href="assets/keroro-exhibition/ai-demo-web.mp4" data-video-poster="assets/keroro-exhibition/ai-demo-poster.jpg" aria-haspopup="dialog">Watch demo</a>
+              </div>
             </article>
-            <article>
-              <h3>Kaohsiung Municipal Gangshan Hospital Interactive Kiosk</h3>
+            <article class="media-project">
+              <div class="project-media"><figure class="project-visual"><button class="visual-trigger" type="button" aria-haspopup="dialog"><img src="assets/gangshan-hospital-kiosk/kiosk-onsite-thumb.webp" data-full="assets/gangshan-hospital-kiosk/kiosk-onsite-large.webp" alt="On-site touchless interaction" width="759" height="1280" loading="lazy" decoding="async" /></button><figcaption>On-site touchless interaction</figcaption></figure></div>
+              <div class="mini-project-copy"><h3>Kaohsiung Municipal Gangshan Hospital Interactive Kiosk</h3>
               <p class="project-meta">Windows · Kinect · Touchless Interaction</p>
               <p>Integrated and deployed a touchless children's game, mapping head and hand movement to gameplay and owning on-site delivery.</p>
+                <a class="video-link" href="assets/gangshan-hospital-kiosk/kiosk-demo-web.mp4" data-video-poster="assets/gangshan-hospital-kiosk/kiosk-demo-poster.jpg" aria-haspopup="dialog">Watch demo</a>
+              </div>
             </article>
-            <article>
-              <h3>Grandma Fruity's Secret</h3>
+            <article class="media-project">
+              <div class="project-media"><figure class="project-visual"><button class="visual-trigger" type="button" aria-haspopup="dialog"><img src="assets/grandma-fruity-secret/app-screenshot-thumb.webp" data-full="assets/grandma-fruity-secret/app-screenshot-large.webp" alt="Mobile app interface" width="591" height="1280" loading="lazy" decoding="async" /></button><figcaption>Mobile app interface</figcaption></figure></div>
+              <div class="mini-project-copy"><h3>Grandma Fruity's Secret</h3>
               <p class="project-meta">iOS / Android · Mobile AR · Product Owner</p>
               <p>Owned a three-person Public Television Service IP project from client communication through implementation and store release.</p>
+                <a class="video-link" href="assets/grandma-fruity-secret/app-demo-web.mp4" data-video-poster="assets/grandma-fruity-secret/app-demo-poster.jpg" aria-haspopup="dialog">Watch demo</a>
+              </div>
             </article>
           </div>
         </section>
@@ -323,7 +345,7 @@
             <div class="project-body">
               <figure class="project-visual">
                 <button class="visual-trigger" type="button" aria-haspopup="dialog">
-                  <img src="assets/birdie-wing-gameplay-960.webp" data-full="assets/birdie-wing-gameplay-full.webp" alt="BIRDIE WING 擊球與軌跡預測畫面" width="960" height="540" decoding="async" />
+                  <img src="assets/birdie-wing/gameplay-960.webp" data-full="assets/birdie-wing/gameplay-full.webp" alt="BIRDIE WING 擊球與軌跡預測畫面" width="960" height="540" decoding="async" />
                 </button>
                 <figcaption>實際遊戲畫面，可見擊球軌跡預測系統。</figcaption>
               </figure>
@@ -356,7 +378,7 @@
             <div class="project-body">
               <figure class="project-visual">
                 <button class="visual-trigger" type="button" aria-haspopup="dialog">
-                  <img src="assets/pili-universe-gameplay-960.webp" data-full="assets/pili-universe-gameplay-full.webp" alt="霹靂宇宙大戲院多人 VR 與透明玩家畫面" width="960" height="540" loading="lazy" decoding="async" />
+                  <img src="assets/pili-universe/gameplay-960.webp" data-full="assets/pili-universe/gameplay-full.webp" alt="霹靂宇宙大戲院多人 VR 與透明玩家畫面" width="960" height="540" loading="lazy" decoding="async" />
                 </button>
                 <figcaption>場域中，不同群組的玩家彼此可見。</figcaption>
               </figure>
@@ -379,7 +401,7 @@
             <div class="project-body">
               <figure class="project-visual">
                 <button class="visual-trigger" type="button" aria-haspopup="dialog">
-                  <img src="assets/taiwan-monster-fruit-gameplay-960.webp" data-full="assets/taiwan-monster-fruit-gameplay-full.webp" alt="妖果小學 Boss 戰遊戲畫面" width="960" height="540" loading="lazy" decoding="async" />
+                  <img src="assets/taiwan-monster-fruit/gameplay-960.webp" data-full="assets/taiwan-monster-fruit/gameplay-full.webp" alt="妖果小學 Boss 戰遊戲畫面" width="960" height="540" loading="lazy" decoding="async" />
                 </button>
                 <figcaption>從企劃發想到程式實作完成的 Boss 戰。</figcaption>
               </figure>
@@ -404,20 +426,29 @@
           </div>
 
           <div class="mini-project-list">
-            <article>
-              <h3>ケロロ軍曹 超共鳴展限定アプリ であります！</h3>
+            <article class="media-project">
+              <div class="project-media"><figure class="project-visual"><button class="visual-trigger" type="button" aria-haspopup="dialog"><img src="assets/keroro-exhibition/ar-interface-thumb.webp" data-full="assets/keroro-exhibition/ar-interface-large.webp" alt="AR 拍照介面" width="591" height="1280" loading="lazy" decoding="async" /></button><figcaption>AR 拍照介面</figcaption></figure><figure class="project-visual"><button class="visual-trigger" type="button" aria-haspopup="dialog"><img src="assets/keroro-exhibition/ai-character-interface-thumb.webp" data-full="assets/keroro-exhibition/ai-character-interface-large.webp" alt="AI 角色互動介面" width="591" height="1280" loading="lazy" decoding="async" /></button><figcaption>AI 角色互動介面</figcaption></figure></div>
+              <div class="mini-project-copy"><h3>ケロロ軍曹 超共鳴展限定アプリ であります！</h3>
               <p class="project-meta">iOS / Android · AR · AI 整合</p>
               <p>擔任日本 IP 展場 App 技術窗口，整合 AR 拍照、AI 回覆觸發網頁內容，以及 iBeacon 現場解鎖與 QR Code 備案。</p>
+                <a class="video-link" href="assets/keroro-exhibition/ai-demo-web.mp4" data-video-poster="assets/keroro-exhibition/ai-demo-poster.jpg" aria-haspopup="dialog">觀看 Demo 影片</a>
+              </div>
             </article>
-            <article>
-              <h3>高醫岡山醫院互動健康小尖兵機台</h3>
+            <article class="media-project">
+              <div class="project-media"><figure class="project-visual"><button class="visual-trigger" type="button" aria-haspopup="dialog"><img src="assets/gangshan-hospital-kiosk/kiosk-onsite-thumb.webp" data-full="assets/gangshan-hospital-kiosk/kiosk-onsite-large.webp" alt="現場機台與零接觸操作" width="759" height="1280" loading="lazy" decoding="async" /></button><figcaption>現場機台與零接觸操作</figcaption></figure></div>
+              <div class="mini-project-copy"><h3>高醫岡山醫院互動健康小尖兵機台</h3>
               <p class="project-meta">Windows · Kinect · 零接觸互動</p>
               <p>整合並部署兒童候診區零接觸遊戲，將頭部與手部動作轉換為遊戲操作，並負責現場交付。</p>
+                <a class="video-link" href="assets/gangshan-hospital-kiosk/kiosk-demo-web.mp4" data-video-poster="assets/gangshan-hospital-kiosk/kiosk-demo-poster.jpg" aria-haspopup="dialog">觀看 Demo 影片</a>
+              </div>
             </article>
-            <article>
-              <h3>水果奶奶的大秘密</h3>
+            <article class="media-project">
+              <div class="project-media"><figure class="project-visual"><button class="visual-trigger" type="button" aria-haspopup="dialog"><img src="assets/grandma-fruity-secret/app-screenshot-thumb.webp" data-full="assets/grandma-fruity-secret/app-screenshot-large.webp" alt="AR 魔方 呈現效果" width="591" height="1280" loading="lazy" decoding="async" /></button><figcaption>AR 魔方 呈現效果</figcaption></figure></div>
+              <div class="mini-project-copy"><h3>水果奶奶的大秘密</h3>
               <p class="project-meta">iOS / Android · Mobile AR · 產品負責人</p>
-              <p>負責客戶溝通、AR 方塊功能實作及雙平台商店上架。</p>
+              <p>負責客戶溝通、AR 魔方功能實作及雙平台商店上架。</p>
+                <a class="video-link" href="assets/grandma-fruity-secret/app-demo-web.mp4" data-video-poster="assets/grandma-fruity-secret/app-demo-poster.jpg" aria-haspopup="dialog">觀看 Demo 影片</a>
+              </div>
             </article>
           </div>
         </section>
@@ -516,7 +547,7 @@
             <div class="project-body">
               <figure class="project-visual">
                 <button class="visual-trigger" type="button" aria-haspopup="dialog">
-                  <img src="assets/birdie-wing-gameplay-960.webp" data-full="assets/birdie-wing-gameplay-full.webp" alt="BIRDIE WINGのショットおよび弾道予測画面" width="960" height="540" decoding="async" />
+                  <img src="assets/birdie-wing/gameplay-960.webp" data-full="assets/birdie-wing/gameplay-full.webp" alt="BIRDIE WINGのショットおよび弾道予測画面" width="960" height="540" decoding="async" />
                 </button>
                 <figcaption>弾道予測システムを表示した実際のゲーム画面。</figcaption>
               </figure>
@@ -549,7 +580,7 @@
             <div class="project-body">
               <figure class="project-visual">
                 <button class="visual-trigger" type="button" aria-haspopup="dialog">
-                  <img src="assets/pili-universe-gameplay-960.webp" data-full="assets/pili-universe-gameplay-full.webp" alt="PILI UniverseのマルチプレイVRおよび半透明プレイヤー表示" width="960" height="540" loading="lazy" decoding="async" />
+                  <img src="assets/pili-universe/gameplay-960.webp" data-full="assets/pili-universe/gameplay-full.webp" alt="PILI UniverseのマルチプレイVRおよび半透明プレイヤー表示" width="960" height="540" loading="lazy" decoding="async" />
                 </button>
                 <figcaption>同一会場内で、別グループのプレイヤーも確認可能。</figcaption>
               </figure>
@@ -572,7 +603,7 @@
             <div class="project-body">
               <figure class="project-visual">
                 <button class="visual-trigger" type="button" aria-haspopup="dialog">
-                  <img src="assets/taiwan-monster-fruit-gameplay-960.webp" data-full="assets/taiwan-monster-fruit-gameplay-full.webp" alt="Monster Fruit Academyのボス戦画面" width="960" height="540" loading="lazy" decoding="async" />
+                  <img src="assets/taiwan-monster-fruit/gameplay-960.webp" data-full="assets/taiwan-monster-fruit/gameplay-full.webp" alt="Monster Fruit Academyのボス戦画面" width="960" height="540" loading="lazy" decoding="async" />
                 </button>
                 <figcaption>企画から実装まで担当したボス戦。</figcaption>
               </figure>
@@ -596,20 +627,29 @@
           </div>
 
           <div class="mini-project-list">
-            <article>
-              <h3>ケロロ軍曹 超共鳴展限定アプリ であります！</h3>
+            <article class="media-project">
+              <div class="project-media"><figure class="project-visual"><button class="visual-trigger" type="button" aria-haspopup="dialog"><img src="assets/keroro-exhibition/ar-interface-thumb.webp" data-full="assets/keroro-exhibition/ar-interface-large.webp" alt="AR撮影画面" width="591" height="1280" loading="lazy" decoding="async" /></button><figcaption>AR撮影画面</figcaption></figure><figure class="project-visual"><button class="visual-trigger" type="button" aria-haspopup="dialog"><img src="assets/keroro-exhibition/ai-character-interface-thumb.webp" data-full="assets/keroro-exhibition/ai-character-interface-large.webp" alt="AIキャラクター対話画面" width="591" height="1280" loading="lazy" decoding="async" /></button><figcaption>AIキャラクター対話画面</figcaption></figure></div>
+              <div class="mini-project-copy"><h3>ケロロ軍曹 超共鳴展限定アプリ であります！</h3>
               <p class="project-meta">iOS / Android · AR · AI連携</p>
               <p>日本IPの展示会限定アプリで技術窓口を担当。AR撮影、AI応答に連動したWebコンテンツ、iBeaconによる会場限定機能とQRコードの代替手段を統合。</p>
+                <a class="video-link" href="assets/keroro-exhibition/ai-demo-web.mp4" data-video-poster="assets/keroro-exhibition/ai-demo-poster.jpg" aria-haspopup="dialog">デモ動画を見る</a>
+              </div>
             </article>
-            <article>
-              <h3>Kaohsiung Municipal Gangshan Hospital Interactive Kiosk</h3>
+            <article class="media-project">
+              <div class="project-media"><figure class="project-visual"><button class="visual-trigger" type="button" aria-haspopup="dialog"><img src="assets/gangshan-hospital-kiosk/kiosk-onsite-thumb.webp" data-full="assets/gangshan-hospital-kiosk/kiosk-onsite-large.webp" alt="現地の非接触操作" width="759" height="1280" loading="lazy" decoding="async" /></button><figcaption>現地の非接触操作</figcaption></figure></div>
+              <div class="mini-project-copy"><h3>Kaohsiung Municipal Gangshan Hospital Interactive Kiosk</h3>
               <p class="project-meta">Windows · Kinect · 非接触インタラクション</p>
               <p>小児外来待合室向けの非接触ゲームを統合・導入。頭部と手の動きをゲーム操作に変換し、現地での納品まで担当。</p>
+                <a class="video-link" href="assets/gangshan-hospital-kiosk/kiosk-demo-web.mp4" data-video-poster="assets/gangshan-hospital-kiosk/kiosk-demo-poster.jpg" aria-haspopup="dialog">デモ動画を見る</a>
+              </div>
             </article>
-            <article>
-              <h3>Grandma Fruity's Secret</h3>
+            <article class="media-project">
+              <div class="project-media"><figure class="project-visual"><button class="visual-trigger" type="button" aria-haspopup="dialog"><img src="assets/grandma-fruity-secret/app-screenshot-thumb.webp" data-full="assets/grandma-fruity-secret/app-screenshot-large.webp" alt="モバイルアプリ画面" width="591" height="1280" loading="lazy" decoding="async" /></button><figcaption>モバイルアプリ画面</figcaption></figure></div>
+              <div class="mini-project-copy"><h3>Grandma Fruity's Secret</h3>
               <p class="project-meta">iOS / Android · Mobile AR · プロダクト責任者</p>
               <p>顧客との要件調整、ARキューブ機能の実装、App StoreとGoogle Playへのリリースを担当。</p>
+                <a class="video-link" href="assets/grandma-fruity-secret/app-demo-web.mp4" data-video-poster="assets/grandma-fruity-secret/app-demo-poster.jpg" aria-haspopup="dialog">デモ動画を見る</a>
+              </div>
             </article>
           </div>
         </section>

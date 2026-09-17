@@ -9,6 +9,9 @@ Rex Ying（英智淵）的線上履歷，內容涵蓋 Unity 技術領導、遊�
 
 ---
 
+本機預覽：執行 `node scripts/preview.cjs`，開啟 `http://localhost:8765`。
+此服務支援影片 HTTP Range 分段讀取，確保播放進度可拖曳；請勿使用不支援 Range 的簡易伺服器。
+
 ## English
 
 The online resume of Rex Ying, covering Unity technical leadership, game systems, XR, and multiplayer development.
