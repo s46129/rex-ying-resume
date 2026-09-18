@@ -73,10 +73,31 @@ const languageMeta = {
   ja: { lang: "ja", title: "Rex Ying 履歴書", close: "閉じる", previous: "前の画像", next: "次の画像" },
 };
 
+const screenLabels = {
+  en: {
+    navigation: "Page sections", language: "Language", experience: "Experience", work: "Selected work", expertise: "Expertise",
+    print: "Print / PDF", primary: "Explore my work", secondary: "Get in touch", note: "Thoughtful systems. Playful experiences.",
+    footerLabel: "HAVE SOMETHING IN MIND?", footerTitle: "Let's build something.", footerNote: "Made with care, in Kaohsiung.", backTop: "Back to top",
+  },
+  zh: {
+    navigation: "頁面導覽", language: "語言", experience: "工作經歷", work: "精選作品", expertise: "專業技能",
+    print: "列印 / PDF", primary: "探索我的作品", secondary: "與我聯絡", note: "細緻的系統，生動的體驗。",
+    footerLabel: "有個想法想聊聊？", footerTitle: "一起打造新的體驗。", footerNote: "用心製作，來自高雄。", backTop: "回到頂端",
+  },
+  ja: {
+    navigation: "ページ内ナビゲーション", language: "言語", experience: "職務経歴", work: "制作実績", expertise: "専門スキル",
+    print: "印刷 / PDF", primary: "制作実績を見る", secondary: "お問い合わせ", note: "丁寧な設計から、遊び心のある体験へ。",
+    footerLabel: "アイデアをお聞かせください", footerTitle: "新しい体験を、一緒に。", footerNote: "高雄から、心を込めて。", backTop: "トップに戻る",
+  },
+};
+
+const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 const revealSelector = [
   ".hero",
   ".summary",
-  ".experience",
+  ".experience > .section-heading",
+  ".company-row",
+  ".experience > .achievement-list",
   ".projects > .section-heading",
   ".project",
   ".additional-work > .section-heading",
@@ -86,22 +107,33 @@ const revealSelector = [
 
 const revealObserver =
   "IntersectionObserver" in window
-    ? new IntersectionObserver(revealEntries, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 })
+    ? new IntersectionObserver(revealEntries, { rootMargin: "0px 0px -5% 0px", threshold: 0.01 })
     : null;
 
 let lightboxIndex = 0;
+let activeLanguage = "en";
+let scrollFrame = null;
 
-function renderResume(language) {
+function renderResume(language, preservePosition = false) {
   const template = document.querySelector(`#resume-${language}`);
 
   if (!template) return;
 
+  const position = preservePosition ? captureReadingPosition() : null;
+  revealObserver?.disconnect();
   resume.replaceChildren(template.content.cloneNode(true));
   const meta = languageMeta[language];
+  activeLanguage = language;
 
   document.documentElement.lang = meta.lang;
   document.title = meta.title;
-  localStorage.setItem("resume-language", language);
+  try {
+    localStorage.setItem("resume-language", language);
+  } catch {
+    // The resume also works when browser storage is unavailable.
+  }
+
+  decorateResume(screenLabels[language]);
 
   languageButtons.forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.language === language));
@@ -118,7 +150,136 @@ function renderResume(language) {
   videoVolume.setAttribute("aria-label", activeVideoLabels.volume);
   updateVideoControls();
 
+  if (position) restoreReadingPosition(position);
   observeReveals();
+  scheduleScrollUpdate();
+}
+
+function decorateResume(labels) {
+  const hero = resume.querySelector(".hero");
+  const identity = hero.querySelector(".identity");
+  hero.id = "top";
+  resume.querySelector(".experience").id = "experience";
+  resume.querySelector(".projects").id = "work";
+  resume.querySelector(".bottom-grid").id = "expertise";
+
+  const index = document.createElement("p");
+  index.className = "hero-index screen-only";
+  index.textContent = "UNITY · XR · INTERACTIVE";
+  identity.prepend(index);
+
+  const note = document.createElement("p");
+  note.className = "hero-note screen-only";
+  note.textContent = labels.note;
+  identity.append(note);
+
+  const actions = document.createElement("div");
+  actions.className = "hero-actions screen-only";
+  for (const [className, href, label, arrow] of [
+    ["primary-link", "#work", labels.primary, "↗"],
+    ["secondary-link", "mailto:ted56129@gmail.com", labels.secondary, "↗"],
+  ]) {
+    const link = document.createElement("a");
+    link.className = className;
+    link.href = href;
+    link.textContent = label;
+    const icon = document.createElement("span");
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = arrow;
+    link.append(icon);
+    actions.append(link);
+  }
+  identity.append(actions);
+
+  const art = document.createElement("div");
+  art.className = "hero-art screen-only";
+  art.setAttribute("aria-hidden", "true");
+  art.innerHTML = `
+    <div class="orbit-scene">
+      <div class="orbit-halo"></div>
+      <div class="orbit-ring orbit-ring-one"></div>
+      <div class="orbit-ring orbit-ring-two"></div>
+      <div class="orbit-ring orbit-ring-three"></div>
+      <div class="orbit-axis orbit-axis-x"></div>
+      <div class="orbit-axis orbit-axis-y"></div>
+      <div class="orbit-core"></div>
+      <div class="orbit-dot orbit-dot-one"></div>
+      <div class="orbit-dot orbit-dot-two"></div>
+    </div>
+    <div class="art-caption"><span>INTERACTIVE SYSTEMS</span><span>01 — ∞</span></div>`;
+  identity.after(art);
+
+  const numberedHeadings = [
+    ".summary .section-label", ".experience .section-heading", ".projects .section-heading",
+    ".additional-work .section-heading", ".bottom-grid > section:first-child .section-heading",
+    ".bottom-grid > section:last-child .section-heading",
+  ];
+  numberedHeadings.forEach((selector, index) => {
+    resume.querySelector(selector).dataset.sectionNumber = String(index + 1).padStart(2, "0");
+  });
+  resume.querySelectorAll(".project").forEach((project, index) => {
+    project.dataset.projectNumber = String(index + 1).padStart(2, "0");
+  });
+
+  document.querySelector(".section-nav")?.setAttribute("aria-label", labels.navigation);
+  document.querySelector(".language-switch")?.setAttribute("aria-label", labels.language);
+  for (const key of ["experience", "work", "expertise"]) {
+    const link = document.querySelector(`[data-nav="${key}"]`);
+    if (link) link.textContent = labels[key];
+  }
+  for (const [attribute, key] of [
+    ["print-label", "print"], ["footer-label", "footerLabel"], ["footer-title", "footerTitle"],
+    ["footer-note", "footerNote"], ["back-top", "backTop"],
+  ]) {
+    const label = document.querySelector(`[data-${attribute}]`);
+    if (label) label.textContent = labels[key];
+  }
+}
+
+const readingBlockSelector = ".hero, .summary, .experience, .project, .additional-work, .bottom-grid";
+
+function captureReadingPosition() {
+  if (window.scrollY === 0) return null;
+  const inset = (document.querySelector(".screen-toolbar")?.getBoundingClientRect().height || 0) + 24;
+  const blocks = [...resume.querySelectorAll(readingBlockSelector)];
+  let index = 0;
+  blocks.forEach((block, blockIndex) => {
+    if (block.getBoundingClientRect().top <= inset) index = blockIndex;
+  });
+  const rect = blocks[index].getBoundingClientRect();
+  return { index, inset, fraction: Math.max(0, (inset - rect.top) / Math.max(rect.height, 1)) };
+}
+
+function restoreReadingPosition({ index, inset, fraction }) {
+  const block = resume.querySelectorAll(readingBlockSelector)[index];
+  if (!block) return;
+  const rect = block.getBoundingClientRect();
+  window.scrollTo({ top: window.scrollY + rect.top + rect.height * fraction - inset, behavior: "instant" });
+}
+
+function scheduleScrollUpdate() {
+  if (scrollFrame !== null) return;
+  scrollFrame = window.requestAnimationFrame(updateScrollState);
+}
+
+function updateScrollState() {
+  scrollFrame = null;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+  const progressBar = document.querySelector(".reading-progress > span");
+  if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+
+  const inset = (document.querySelector(".screen-toolbar")?.getBoundingClientRect().height || 0) + 80;
+  const links = [...document.querySelectorAll("[data-nav]")];
+  let current = null;
+  for (const link of links) {
+    const section = document.getElementById(link.dataset.nav);
+    if (section && section.getBoundingClientRect().top <= inset) current = link;
+  }
+  for (const link of links) {
+    if (link === current) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  }
 }
 
 function observeReveals() {
@@ -126,6 +287,10 @@ function observeReveals() {
 
   revealObserver.disconnect();
   resume.querySelectorAll(revealSelector).forEach((element) => {
+    if (motionPreference.matches) {
+      element.classList.add("is-visible");
+      return;
+    }
     element.classList.add("reveal");
     revealObserver.observe(element);
   });
@@ -177,8 +342,15 @@ function loadAllImages() {
 }
 
 languageButtons.forEach((button) => {
-  button.addEventListener("click", () => renderResume(button.dataset.language));
+  button.addEventListener("click", () => {
+    if (button.dataset.language !== activeLanguage) renderResume(button.dataset.language, true);
+  });
 });
+
+window.addEventListener("scroll", scheduleScrollUpdate, { passive: true });
+window.addEventListener("resize", scheduleScrollUpdate, { passive: true });
+window.addEventListener("load", scheduleScrollUpdate);
+motionPreference.addEventListener("change", observeReveals);
 
 resume.addEventListener("click", (event) => {
   const videoLink = event.target.closest(".video-link");
@@ -228,5 +400,10 @@ printButton.addEventListener("click", async () => {
 
 window.addEventListener("beforeprint", loadAllImages);
 
-const savedLanguage = localStorage.getItem("resume-language");
+let savedLanguage;
+try {
+  savedLanguage = localStorage.getItem("resume-language");
+} catch {
+  // Use English when browser storage is unavailable.
+}
 renderResume(["en", "zh", "ja"].includes(savedLanguage) ? savedLanguage : "en");

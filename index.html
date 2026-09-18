@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Rex Ying Resume</title>
+    <meta name="theme-color" content="#f8f9f5" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23252c27'/%3E%3Ctext x='9' y='23' fill='%23f8f9f5' font-family='Georgia,serif' font-size='27' font-style='italic'%3Er.%3C/text%3E%3C/svg%3E" />
     <meta
       name="description"
       content="Resume for Rex Ying, Unity Technical Lead and Senior Unity Engineer."
@@ -12,19 +14,31 @@
     <script src="script.js" defer></script>
   </head>
   <body>
+    <div class="reading-progress" aria-hidden="true"><span></span></div>
     <header class="screen-toolbar">
-      <strong>Rex Ying Resume</strong>
+      <a class="brand" href="#top" aria-label="Rex Ying"><span class="brand-mark" aria-hidden="true">r.</span><span>Rex Ying<span class="brand-period">.</span></span></a>
+      <nav class="section-nav" aria-label="Sections">
+        <a href="#experience" data-nav="experience">Experience</a>
+        <a href="#work" data-nav="work">Work</a>
+        <a href="#expertise" data-nav="expertise">Expertise</a>
+      </nav>
       <div class="toolbar-actions">
         <div class="language-switch" role="group" aria-label="Language">
           <button type="button" data-language="en" aria-pressed="true">EN</button>
           <button type="button" data-language="zh" aria-pressed="false">中文</button>
           <button type="button" data-language="ja" aria-pressed="false">日本語</button>
         </div>
-        <button class="print-button" type="button" data-print>Print / PDF</button>
+        <button class="print-button" type="button" data-print><span data-print-label>Print / PDF</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4" /></svg></button>
       </div>
     </header>
 
     <main id="resume" class="resume" aria-live="polite"></main>
+
+    <footer class="site-footer screen-only">
+      <p class="footer-label" data-footer-label>HAVE SOMETHING IN MIND?</p>
+      <a class="footer-contact" href="mailto:ted56129@gmail.com"><span data-footer-title>Let’s build something.</span><span aria-hidden="true">↗</span></a>
+      <div class="footer-bottom"><span>© Rex Ying <span class="footer-divider">/</span> <span data-footer-note>Made with intention.</span></span><a href="#top"><span data-back-top>Back to top</span> <span aria-hidden="true">↑</span></a></div>
+    </footer>
 
     <dialog class="lightbox" aria-labelledby="lightbox-title">
       <button class="lightbox-button lightbox-close" type="button" data-lightbox-close aria-label="Close" autofocus>
@@ -75,7 +89,7 @@
             <span>Kaohsiung, Taiwan</span>
             <a href="mailto:ted56129@gmail.com">ted56129@gmail.com</a>
             <a href="https://github.com/s46129">github.com/s46129</a>
-            <a class="resume-qr" href="https://s46129.github.io/rex-ying-resume/" aria-label="Open online resume">
+            <a class="resume-qr" href="https://rex-ying.s46129.chatgpt.site" aria-label="Open online resume">
               <img src="assets/resume-qr.png" alt="QR code for Rex Ying's online resume" width="68" height="68" />
               <span>Online resume</span>
             </a>
@@ -237,7 +251,7 @@
               <div class="mini-project-copy"><h3>Kaohsiung Municipal Gangshan Hospital Interactive Kiosk</h3>
               <p class="project-meta">Windows · Kinect · Touchless Interaction</p>
               <p>Integrated and deployed a touchless children's game, mapping head and hand movement to gameplay and owning on-site delivery.</p>
-                <a class="video-link" href="assets/gangshan-hospital-kiosk/kiosk-demo-web.mp4" data-video-poster="assets/gangshan-hospital-kiosk/kiosk-demo-poster.jpg" aria-haspopup="dialog">Watch demo</a>
+                <a class="video-link" href="assets/gangshan-hospital-kiosk/kiosk-demo-site.mp4" data-video-poster="assets/gangshan-hospital-kiosk/kiosk-demo-poster.jpg" aria-haspopup="dialog">Watch demo</a>
               </div>
             </article>
             <article class="media-project">
@@ -289,7 +303,7 @@
             <span>台灣，高雄</span>
             <a href="mailto:ted56129@gmail.com">ted56129@gmail.com</a>
             <a href="https://github.com/s46129">github.com/s46129</a>
-            <a class="resume-qr" href="https://s46129.github.io/rex-ying-resume/" aria-label="開啟線上履歷">
+            <a class="resume-qr" href="https://rex-ying.s46129.chatgpt.site" aria-label="開啟線上履歷">
               <img src="assets/resume-qr.png" alt="英智淵線上履歷 QR Code" width="68" height="68" />
               <span>線上履歷</span>
             </a>
@@ -439,7 +453,7 @@
               <div class="mini-project-copy"><h3>高醫岡山醫院互動健康小尖兵機台</h3>
               <p class="project-meta">Windows · Kinect · 零接觸互動</p>
               <p>整合並部署兒童候診區零接觸遊戲，將頭部與手部動作轉換為遊戲操作，並負責現場交付。</p>
-                <a class="video-link" href="assets/gangshan-hospital-kiosk/kiosk-demo-web.mp4" data-video-poster="assets/gangshan-hospital-kiosk/kiosk-demo-poster.jpg" aria-haspopup="dialog">觀看 Demo 影片</a>
+                <a class="video-link" href="assets/gangshan-hospital-kiosk/kiosk-demo-site.mp4" data-video-poster="assets/gangshan-hospital-kiosk/kiosk-demo-poster.jpg" aria-haspopup="dialog">觀看 Demo 影片</a>
               </div>
             </article>
             <article class="media-project">
@@ -491,7 +505,7 @@
             <span>台湾・高雄</span>
             <a href="mailto:ted56129@gmail.com">ted56129@gmail.com</a>
             <a href="https://github.com/s46129">github.com/s46129</a>
-            <a class="resume-qr" href="https://s46129.github.io/rex-ying-resume/" aria-label="オンライン履歴書を開く">
+            <a class="resume-qr" href="https://rex-ying.s46129.chatgpt.site" aria-label="オンライン履歴書を開く">
               <img src="assets/resume-qr.png" alt="Rex Ying オンライン履歴書のQRコード" width="68" height="68" />
               <span>Web履歴書</span>
             </a>
@@ -640,7 +654,7 @@
               <div class="mini-project-copy"><h3>Kaohsiung Municipal Gangshan Hospital Interactive Kiosk</h3>
               <p class="project-meta">Windows · Kinect · 非接触インタラクション</p>
               <p>小児外来待合室向けの非接触ゲームを統合・導入。頭部と手の動きをゲーム操作に変換し、現地での納品まで担当。</p>
-                <a class="video-link" href="assets/gangshan-hospital-kiosk/kiosk-demo-web.mp4" data-video-poster="assets/gangshan-hospital-kiosk/kiosk-demo-poster.jpg" aria-haspopup="dialog">デモ動画を見る</a>
+                <a class="video-link" href="assets/gangshan-hospital-kiosk/kiosk-demo-site.mp4" data-video-poster="assets/gangshan-hospital-kiosk/kiosk-demo-poster.jpg" aria-haspopup="dialog">デモ動画を見る</a>
               </div>
             </article>
             <article class="media-project">
