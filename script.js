@@ -76,18 +76,15 @@ const languageMeta = {
 const screenLabels = {
   en: {
     navigation: "Page sections", language: "Language", experience: "Experience", work: "Selected work", expertise: "Expertise",
-    print: "Print / PDF", primary: "Explore my work", secondary: "Get in touch", note: "Thoughtful systems. Playful experiences.",
-    footerLabel: "HAVE SOMETHING IN MIND?", footerTitle: "Let's build something.", footerNote: "Made with care, in Kaohsiung.", backTop: "Back to top",
+    print: "Print / PDF",
   },
   zh: {
     navigation: "頁面導覽", language: "語言", experience: "工作經歷", work: "精選作品", expertise: "專業技能",
-    print: "列印 / PDF", primary: "探索我的作品", secondary: "與我聯絡", note: "細緻的系統，生動的體驗。",
-    footerLabel: "有個想法想聊聊？", footerTitle: "一起打造新的體驗。", footerNote: "用心製作，來自高雄。", backTop: "回到頂端",
+    print: "列印 / PDF",
   },
   ja: {
     navigation: "ページ内ナビゲーション", language: "言語", experience: "職務経歴", work: "制作実績", expertise: "専門スキル",
-    print: "印刷 / PDF", primary: "制作実績を見る", secondary: "お問い合わせ", note: "丁寧な設計から、遊び心のある体験へ。",
-    footerLabel: "アイデアをお聞かせください", footerTitle: "新しい体験を、一緒に。", footerNote: "高雄から、心を込めて。", backTop: "トップに戻る",
+    print: "印刷 / PDF",
   },
 };
 
@@ -157,68 +154,23 @@ function renderResume(language, preservePosition = false) {
 
 function decorateResume(labels) {
   const hero = resume.querySelector(".hero");
-  const identity = hero.querySelector(".identity");
   hero.id = "top";
   resume.querySelector(".experience").id = "experience";
   resume.querySelector(".projects").id = "work";
   resume.querySelector(".bottom-grid").id = "expertise";
 
-  const index = document.createElement("p");
-  index.className = "hero-index screen-only";
-  index.textContent = "UNITY · XR · INTERACTIVE";
-  identity.prepend(index);
-
-  const note = document.createElement("p");
-  note.className = "hero-note screen-only";
-  note.textContent = labels.note;
-  identity.append(note);
-
-  const actions = document.createElement("div");
-  actions.className = "hero-actions screen-only";
-  for (const [className, href, label, arrow] of [
-    ["primary-link", "#work", labels.primary, "↗"],
-    ["secondary-link", "mailto:ted56129@gmail.com", labels.secondary, "↗"],
-  ]) {
-    const link = document.createElement("a");
-    link.className = className;
-    link.href = href;
-    link.textContent = label;
-    const icon = document.createElement("span");
-    icon.setAttribute("aria-hidden", "true");
-    icon.textContent = arrow;
-    link.append(icon);
-    actions.append(link);
-  }
-  identity.append(actions);
-
-  const art = document.createElement("div");
-  art.className = "hero-art screen-only";
-  art.setAttribute("aria-hidden", "true");
-  art.innerHTML = `
-    <div class="orbit-scene">
-      <div class="orbit-halo"></div>
-      <div class="orbit-ring orbit-ring-one"></div>
-      <div class="orbit-ring orbit-ring-two"></div>
-      <div class="orbit-ring orbit-ring-three"></div>
-      <div class="orbit-axis orbit-axis-x"></div>
-      <div class="orbit-axis orbit-axis-y"></div>
-      <div class="orbit-core"></div>
-      <div class="orbit-dot orbit-dot-one"></div>
-      <div class="orbit-dot orbit-dot-two"></div>
-    </div>
-    <div class="art-caption"><span>INTERACTIVE SYSTEMS</span><span>01 — ∞</span></div>`;
-  identity.after(art);
-
-  const numberedHeadings = [
-    ".summary .section-label", ".experience .section-heading", ".projects .section-heading",
-    ".additional-work .section-heading", ".bottom-grid > section:first-child .section-heading",
-    ".bottom-grid > section:last-child .section-heading",
-  ];
-  numberedHeadings.forEach((selector, index) => {
-    resume.querySelector(selector).dataset.sectionNumber = String(index + 1).padStart(2, "0");
-  });
   resume.querySelectorAll(".project").forEach((project, index) => {
-    project.dataset.projectNumber = String(index + 1).padStart(2, "0");
+    project.id = ["birdie-wing", "pili-universe", "monster-fruit"][index];
+  });
+  resume.querySelectorAll(".video-link").forEach((link) => {
+    const label = link.textContent;
+    link.setAttribute("aria-label", label);
+    link.title = label;
+    link.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7z" /></svg>';
+    const text = document.createElement("span");
+    text.className = "sr-only";
+    text.textContent = label;
+    link.append(text);
   });
 
   document.querySelector(".section-nav")?.setAttribute("aria-label", labels.navigation);
@@ -227,13 +179,8 @@ function decorateResume(labels) {
     const link = document.querySelector(`[data-nav="${key}"]`);
     if (link) link.textContent = labels[key];
   }
-  for (const [attribute, key] of [
-    ["print-label", "print"], ["footer-label", "footerLabel"], ["footer-title", "footerTitle"],
-    ["footer-note", "footerNote"], ["back-top", "backTop"],
-  ]) {
-    const label = document.querySelector(`[data-${attribute}]`);
-    if (label) label.textContent = labels[key];
-  }
+  printButton.setAttribute("aria-label", labels.print);
+  printButton.title = labels.print;
 }
 
 const readingBlockSelector = ".hero, .summary, .experience, .project, .additional-work, .bottom-grid";
