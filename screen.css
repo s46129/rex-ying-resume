@@ -19,7 +19,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .reading-progress { position: fixed; top: 0; left: 0; right: 0; height: 1px; z-index: 30; pointer-events: none; }
 .reading-progress span { display: block; width: 100%; height: 100%; background: var(--ink); transform: scaleX(0); transform-origin: left; }
-.screen-toolbar { position: sticky; top: 0; display: flex; width: min(calc(100% - 80px), var(--content-width)); min-height: 84px; margin: 0 auto; padding: 14px 0; gap: 28px; background: rgb(255 255 255 / 94%); border: 0; border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: none; backdrop-filter: blur(16px); }
+.screen-toolbar { position: sticky; top: 0; display: flex; width: 100%; min-height: 84px; margin: 0; padding: 14px max(40px, calc((100% - var(--content-width)) / 2)); gap: 28px; background: var(--paper); border: 0; border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: none; backdrop-filter: none; }
 .brand { color: var(--ink); font-weight: 650; font-size: 1.0625rem; letter-spacing: -.6px; white-space: nowrap; text-decoration: none; }
 .section-nav { display: flex; gap: 28px; margin-left: auto; }
 .section-nav a { position: relative; padding: 10px 0; color: var(--muted); font-size: .875rem; text-decoration: none; }
@@ -155,7 +155,8 @@ h2 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 450; letter-spacing: -1px
 }
 
 @media (max-width: 1050px) {
-  .screen-toolbar, .page, .site-footer { width: calc(100% - 56px); }
+  .page, .site-footer { width: calc(100% - 56px); }
+  .screen-toolbar { padding-inline: 28px; }
   .section-nav { gap: 22px; }
   .toolbar-actions { margin-left: 0; gap: 10px; }
   .hero { gap: 30px; }
@@ -168,8 +169,8 @@ h2 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 450; letter-spacing: -1px
 
 @media (max-width: 760px) {
   html { scroll-padding-top: 122px; }
-  .screen-toolbar, .page, .site-footer { width: calc(100% - 40px); }
-  .screen-toolbar { min-height: 104px; flex-wrap: wrap; padding: 9px 0 0; gap: 0 10px; }
+  .page, .site-footer { width: calc(100% - 40px); }
+  .screen-toolbar { min-height: 104px; flex-wrap: wrap; padding: 9px 20px 0; gap: 0 10px; }
   .brand { font-size: 1rem; }
   .toolbar-actions { margin-left: auto; }
   .section-nav { order: 3; justify-content: space-between; width: 100%; margin: 0; gap: 20px; }

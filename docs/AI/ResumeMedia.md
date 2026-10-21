@@ -24,3 +24,4 @@
 - ChatGPT Sites 的靜態目錄為 `dist`；`scripts/build-sites.cjs` 只複製四個網頁檔（HTML、兩份 CSS、一份 JS）與 HTML 引用的 assets，避免把文件與未使用的素材公開。修改素材引用後須重新 build。
 - 高醫 `kiosk-demo-site.mp4` 是 Sites 用的 540px、faststart 版本（約 15 MB），原 `kiosk-demo-web.mp4` 保留但不打包。影片時長、操作及 poster 不变。
 - 履歷 QR 圖與三語連結須同時指向 `.openai/hosting.json` 對應 Site 的正式 URL。
+- 2026-10 整合：三語 template 以 GitHub `af628b9` 審核後文案為準；視覺以 Sites 第 3 版 `c1aba1e` 為基礎。較新的全寬不透明導覽列修正移植至 `screen.css`，不恢復已移除的裝飾、編號或舊配色。GitHub 與 Sites 是不同儲存庫；Sites 推送不會同步 GitHub，後續部署必須以已整合的 GitHub 來源為準，不能覆蓋其他任務的新文案。
