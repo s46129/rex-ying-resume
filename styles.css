@@ -751,6 +751,10 @@ html:has(.video-dialog[open]) { overflow: hidden; }
     --accent-deep: #374d31;
     --accent-bright: #718c63;
     --content-width: 1120px;
+    /* Match the blue-to-green rainbow accent shown beneath the resume name. */
+    --resume-rainbow: linear-gradient(90deg,
+      #6678d2 0%, #8a5ecd 20%, #ad5a90 40%,
+      #c76f59 60%, #e2b45f 78%, #93a961 100%);
   }
 
   html { background: var(--paper); scroll-behavior: smooth; scroll-padding-top: 112px; }
@@ -760,21 +764,22 @@ html:has(.video-dialog[open]) { overflow: hidden; }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 
   .reading-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 30; pointer-events: none; }
-  .reading-progress span { display: block; width: 100%; height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; }
+  .reading-progress span { display: block; width: 100%; height: 100%; background: var(--resume-rainbow); transform: scaleX(0); transform-origin: left; }
 
   .screen-toolbar {
     top: 0;
-    width: min(calc(100% - 80px), var(--content-width));
+    width: 100%;
     min-height: 88px;
-    margin: 0 auto;
-    padding: 15px 0;
+    margin: 0;
+    padding: 15px max(40px, calc((100% - var(--content-width)) / 2));
     gap: 24px;
-    background: rgb(248 249 245 / 92%);
+    /* An opaque, edge-to-edge background keeps scrolled content behind the toolbar. */
+    background: var(--paper);
     border: 0;
     border-bottom: 1px solid var(--light-line);
     border-radius: 0;
     box-shadow: none;
-    backdrop-filter: blur(20px);
+    backdrop-filter: none;
   }
   .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; white-space: nowrap; font-size: 16px; font-weight: 650; letter-spacing: -.5px; }
   .brand-mark { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: var(--paper); font: italic 24px Georgia, serif; padding: 0 2px 5px 0; }
@@ -918,7 +923,8 @@ html:has(.video-dialog[open]) { overflow: hidden; }
 @keyframes core-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
 
 @media screen and (max-width: 1050px) {
-  .screen-toolbar, .page, .site-footer { width: calc(100% - 64px); }
+  .page, .site-footer { width: calc(100% - 64px); }
+  .screen-toolbar { padding-inline: 32px; }
   .section-nav { gap: 20px; }
   .toolbar-actions { margin-left: 8px; gap: 14px; }
   .hero { grid-template-columns: minmax(0, 1fr) 280px; gap: 38px 30px; padding-top: 65px; }
@@ -933,8 +939,8 @@ html:has(.video-dialog[open]) { overflow: hidden; }
 
 @media screen and (max-width: 760px) {
   html { scroll-padding-top: 122px; }
-  .screen-toolbar { flex-wrap: wrap; gap: 0 12px; min-height: 100px; padding: 12px 0 0; }
-  .screen-toolbar, .page, .site-footer { width: calc(100% - 40px); }
+  .screen-toolbar { flex-wrap: wrap; gap: 0 12px; min-height: 100px; padding-block: 12px 0; padding-inline: 20px; }
+  .page, .site-footer { width: calc(100% - 40px); }
   .brand { font-size: 14px; gap: 8px; }
   .brand-mark { width: 28px; height: 28px; font-size: 22px; }
   .toolbar-actions { margin-left: auto; gap: 12px; }
@@ -1012,7 +1018,8 @@ html:has(.video-dialog[open]) { overflow: hidden; }
 }
 
 @media screen and (max-width: 360px) {
-  .screen-toolbar, .page, .site-footer { width: calc(100% - 32px); }
+  .page, .site-footer { width: calc(100% - 32px); }
+  .screen-toolbar { padding-inline: 16px; }
   .brand > span:last-child { display: none; }
   h1 { font-size: 74px; }
   .hero-art { width: 95px; }
