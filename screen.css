@@ -104,7 +104,7 @@ h2 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 450; letter-spacing: -1px
 .project { --project-color: #4285f4; }
 #pili-universe { --project-color: #a44ced; }
 #monster-fruit { --project-color: #f34d59; }
- .project .visual-trigger { position: relative; z-index: 1; border: 0; border-radius: 20px; background: #fff; }
+ .project .visual-trigger { position: relative; z-index: 1; border: 0; border-radius: 20px; background: #fff; box-shadow: 0 0 0 7px var(--project-color); }
 .project .visual-trigger::after { transition: opacity 180ms, transform 240ms; }
 .visual-trigger:active::after { transform: scale(.85); }
 @media (hover: hover) and (pointer: fine) {

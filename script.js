@@ -90,8 +90,6 @@ const screenLabels = {
 
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 const revealSelector = [
-  ".hero",
-  ".summary",
   ".experience > .section-heading",
   ".company-row",
   ".experience > .achievement-list",
@@ -120,7 +118,10 @@ function renderResume(language, preservePosition = false) {
   const position = preservePosition ? captureReadingPosition() : null;
   disposeLiquidFrames();
   revealObserver?.disconnect();
-  resume.replaceChildren(template.content.cloneNode(true));
+  if (resume.dataset.renderedLanguage !== language || !resume.firstElementChild) {
+    resume.replaceChildren(template.content.cloneNode(true));
+  }
+  resume.dataset.renderedLanguage = language;
   const meta = languageMeta[language];
   activeLanguage = language;
 
@@ -133,7 +134,7 @@ function renderResume(language, preservePosition = false) {
   }
 
   decorateResume(screenLabels[language]);
-  disposeLiquidFrames = setupLiquidFrames();
+  disposeLiquidFrames = observeLiquidFrames();
 
   languageButtons.forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.language === language));
@@ -186,18 +187,36 @@ function decorateResume(labels) {
   printButton.title = labels.print;
 }
 
-function setupLiquidFrames() {
+function observeLiquidFrames() {
+  const disposers = [];
+  const projects = [...resume.querySelectorAll(".project")];
+  if (!("IntersectionObserver" in window)) {
+    projects.forEach(project => disposers.push(setupLiquidFrames(project)));
+    return () => disposers.forEach(dispose => dispose());
+  }
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      disposers.push(setupLiquidFrames(entry.target));
+      observer.unobserve(entry.target);
+    }
+  }, { rootMargin: "300px" });
+  projects.forEach(project => observer.observe(project));
+  return () => { observer.disconnect(); disposers.forEach(dispose => dispose()); };
+}
+
+function setupLiquidFrames(project) {
   if (!window.ResizeObserver) return () => {};
   const controller = new AbortController();
   const options = { signal: controller.signal, passive: true };
   const finePointer = matchMedia("(hover: hover) and (pointer: fine)");
   let frame = null;
-  const items = [...resume.querySelectorAll(".project .project-visual")].map((figure, index) => {
+  const items = [...project.querySelectorAll(".project-visual")].map((figure, index) => {
     const button = figure.querySelector(".visual-trigger");
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.classList.add("liquid-frame", "screen-only");
     svg.setAttribute("aria-hidden", "true");
-    const id = `liquid-${index}`;
+    const id = `liquid-${project.id}-${index}`;
     svg.innerHTML = `<defs><filter id="${id}" x="-20%" y="-30%" width="140%" height="160%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="7"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/></filter></defs><rect x="33" y="33" rx="27"/><g filter="url(#${id})"><circle class="liquid-anchor" r="0"/><circle class="liquid-drop" r="0"/></g>`;
     figure.prepend(svg);
     return { figure, button, svg, rect: svg.querySelector("rect"), drop: svg.querySelector(".liquid-drop"), anchor: svg.querySelector(".liquid-anchor"), x: 40, y: 40, tx: 40, ty: 40, r: 0, target: 0 };
@@ -310,7 +329,7 @@ function observeReveals() {
 
   revealObserver.disconnect();
   resume.querySelectorAll(revealSelector).forEach((element) => {
-    if (motionPreference.matches) {
+    if (motionPreference.matches || element.getBoundingClientRect().top < innerHeight) {
       element.classList.add("is-visible");
       return;
     }

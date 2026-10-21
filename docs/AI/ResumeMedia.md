@@ -1,6 +1,8 @@
 # 履歷媒體
 
 - 三種語言各有獨立 template；修改專案內容與資產引用須同步 en / zh / ja。
+- `build-sites.cjs` 將英文 template 預渲染到輸出的 main，並嵌入兩份 CSS（screen.css 保留 media="screen"），避免首屏等待 CSS/JS 請求。原始檔仍是唯一來源；不要手改 dist。部署檢查與預覽須使用 `/dist/index.html`，根目錄僅是來源模板。JS 以 data-rendered-language 重用預渲染節點，記住的非英文語言則在啟動時切換。腳本 URL 由內容 hash 產生。
+- 首屏 hero、summary 不套進場位移；其餘已在可視區的文字直接顯示。作品縮圖使用 lazy；完整圖與影片仍按需載入。液態框由 IntersectionObserver 在接近作品 300px 時初始化，尚未初始化時以 CSS 同心外框保持外觀。
 - 螢幕作品集樣式置於以 `media="screen"` 載入的 `screen.css`；`styles.css` 保留三張 A4 的字級與尺寸。螢幕裝飾不得影響列印。
 - 語言重繪會重建螢幕裝飾、區塊錨點及 observer；保留目前閱讀區塊的相對位置。localStorage 不可用時仍須正常渲染。
 - 捲動進度與導覽共用 passive scroll + requestAnimationFrame；reduced-motion 下停止自動動畫、平滑捲動與淡入。CSS 不得讓列印或減少動畫模式的內容保持透明。
@@ -25,3 +27,4 @@
 - 高醫 `kiosk-demo-site.mp4` 是 Sites 用的 540px、faststart 版本（約 15 MB），原 `kiosk-demo-web.mp4` 保留但不打包。影片時長、操作及 poster 不变。
 - 履歷 QR 圖與三語連結須同時指向 `.openai/hosting.json` 對應 Site 的正式 URL。
 - 2026-10 整合：三語 template 以 GitHub `af628b9` 審核後文案為準；視覺以 Sites 第 3 版 `c1aba1e` 為基礎。較新的全寬不透明導覽列修正移植至 `screen.css`，不恢復已移除的裝飾、編號或舊配色。GitHub 與 Sites 是不同儲存庫；Sites 推送不會同步 GitHub，後續部署必須以已整合的 GitHub 來源為準，不能覆蓋其他任務的新文案。
+
