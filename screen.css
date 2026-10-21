@@ -8,6 +8,7 @@
   --accent-deep: #1b2027;
   --accent-bright: #285ee8;
   --play-color: #ffdf38;
+  --rainbow-gradient: linear-gradient(90deg, #00c9f5, #4d7aff 25%, #bc61ff 45%, #ff62b0 65%, #ffae67 83%, #ffe76a);
   --content-width: 1160px;
 }
 
@@ -52,13 +53,13 @@ html[lang="zh-Hant"] h1 { margin-left: -3px; font-family: "PingFang TC", "Micros
 .contact .resume-qr { display: none; }
 
 .identity h1 { position: relative; padding-bottom: 12px; font-weight: 650; text-decoration: none; }
-.identity h1::after { content: ""; position: absolute; height: 7px; left: 4px; right: 0; bottom: 0; border-radius: 10px; background: linear-gradient(90deg, #00c9f5, #4d7aff 25%, #bc61ff 45%, #ff62b0 65%, #ffae67 83%, #ffe76a); }
+.identity h1::after { content: ""; position: absolute; height: 7px; left: 4px; right: 0; bottom: 0; border-radius: 10px; background: var(--rainbow-gradient); }
 .hero { position: relative; isolation: isolate; }
 .hero::before { content: ""; position: absolute; z-index: -1; inset: 6% -1% 2% 28%; pointer-events: none; background: linear-gradient(125deg, #fff 8%, #dcfaff 30%, #e8e4ff 48%, #ffe2f2 65%, #fff0d4 82%, #fff 97%); opacity: .75; mask-image: radial-gradient(ellipse at center, #000 10%, transparent 70%); }
 .brand { color: #285ee8; }
 .section-nav a:nth-child(2)::after { background: #ea4355; }
 .section-nav a:nth-child(3)::after { background: #299453; }
-.reading-progress span { background: linear-gradient(90deg, #4285f4, #a44ced, #ea4355, #fbbc04, #34a853); }
+.reading-progress span { background: var(--rainbow-gradient); }
 .section-nav a::after { height: 3px; background: #386aee; }
 .print-button, .video-link { transition: background 180ms, transform 180ms; }
 .print-button:hover, .video-link:hover { background: var(--play-color); }
