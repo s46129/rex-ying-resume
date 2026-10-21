@@ -193,7 +193,7 @@ h2 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 450; letter-spacing: -1px
   .achievement-list li, .page-two .achievement-list li { font-size: 1rem; }
   .project, .project:last-child, .page-two .project { display: flex; flex-direction: column; gap: 22px; padding: 32px 0 40px; }
   .project-body { display: flex; flex-direction: column; gap: 24px; }
-  .project-body > .project-visual { position: static; width: 100%; }
+  .project-body > .project-visual { position: relative; top: auto; width: 100%; }
   .project h3 { font-size: 1.5rem; }
   .project-meta { margin-top: 10px; font-size: .75rem; }
   .mini-project-list .media-project { grid-template-columns: 130px minmax(0, 1fr); gap: 26px; }

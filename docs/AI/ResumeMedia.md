@@ -7,6 +7,7 @@
 - 不加入非本人作品的技術模擬。活力來自真實作品圖片、各作品的重點色與 CSS hover／focus 回饋；reduced-motion 停止位移與縮放。
 - `setupLiquidFrames` 只裝飾三個代表作品。SVG 靜態外框不套模糊濾鏡，照片圓角 20px、外框 27px（外擴 7px）維持同心；只有水滴與連接點使用融合濾鏡。滑鼠靠近才排程動畫，收斂即停；捲動、失焦、背景分頁與 reduced-motion 重設水滴。語言重繪前清除事件及 ResizeObserver。觸控使用靜態框。
 - 彩虹光使用白底上的相鄰明亮色相，避免多層互補色疊加成灰；放大圖示採置中的 SVG 背景，不用「＋」字形或旋轉圖示。
+- 手機版 `.project-visual` 必須為 `position: relative; top: auto`：取消桌面的 sticky，但仍作為絕對定位 SVG 色框的基準；不可改成 static。驗證各語言及 760px 斷點兩側，色框四邊均外擴 7px。
 - 視覺以作品與技術內容為主；不加章節編號、無關裝飾球體或泛用頁尾口號。列印與影片操作採圖示並保留三語 aria-label；影片文字在列印時恢復。
 - 圖片縮圖由 HTML `src` 載入，`data-full` 用於放大；圖說與標題分別取自 figure、article。
 - 新增作品使用完整直式圖片；不可沿用代表作品的 16:9 裁切。lightbox 亦須支援直式比例。
