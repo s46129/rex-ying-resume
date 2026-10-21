@@ -110,6 +110,7 @@ const revealObserver =
 let lightboxIndex = 0;
 let activeLanguage = "en";
 let scrollFrame = null;
+let disposeLiquidFrames = () => {};
 
 function renderResume(language, preservePosition = false) {
   const template = document.querySelector(`#resume-${language}`);
@@ -117,6 +118,7 @@ function renderResume(language, preservePosition = false) {
   if (!template) return;
 
   const position = preservePosition ? captureReadingPosition() : null;
+  disposeLiquidFrames();
   revealObserver?.disconnect();
   resume.replaceChildren(template.content.cloneNode(true));
   const meta = languageMeta[language];
@@ -131,6 +133,7 @@ function renderResume(language, preservePosition = false) {
   }
 
   decorateResume(screenLabels[language]);
+  disposeLiquidFrames = setupLiquidFrames();
 
   languageButtons.forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.language === language));
@@ -181,6 +184,79 @@ function decorateResume(labels) {
   }
   printButton.setAttribute("aria-label", labels.print);
   printButton.title = labels.print;
+}
+
+function setupLiquidFrames() {
+  if (!window.ResizeObserver) return () => {};
+  const controller = new AbortController();
+  const options = { signal: controller.signal, passive: true };
+  const finePointer = matchMedia("(hover: hover) and (pointer: fine)");
+  let frame = null;
+  const items = [...resume.querySelectorAll(".project .project-visual")].map((figure, index) => {
+    const button = figure.querySelector(".visual-trigger");
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.classList.add("liquid-frame", "screen-only");
+    svg.setAttribute("aria-hidden", "true");
+    const id = `liquid-${index}`;
+    svg.innerHTML = `<defs><filter id="${id}" x="-20%" y="-30%" width="140%" height="160%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="7"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/></filter></defs><rect x="33" y="33" rx="27"/><g filter="url(#${id})"><circle class="liquid-anchor" r="0"/><circle class="liquid-drop" r="0"/></g>`;
+    figure.prepend(svg);
+    return { figure, button, svg, rect: svg.querySelector("rect"), drop: svg.querySelector(".liquid-drop"), anchor: svg.querySelector(".liquid-anchor"), x: 40, y: 40, tx: 40, ty: 40, r: 0, target: 0 };
+  });
+  const resize = new ResizeObserver(() => {
+    for (const item of items) {
+      const { width, height } = item.button.getBoundingClientRect();
+      item.svg.setAttribute("width", width + 80);
+      item.svg.setAttribute("height", height + 80);
+      item.rect.setAttribute("width", width + 14);
+      item.rect.setAttribute("height", height + 14);
+    }
+  });
+  items.forEach(item => resize.observe(item.button));
+  function tick() {
+    frame = null;
+    let moving = false;
+    for (const item of items) {
+      item.x += (item.tx - item.x) * .23;
+      item.y += (item.ty - item.y) * .23;
+      item.r += (item.target - item.r) * .18;
+      item.drop.setAttribute("cx", item.x);
+      item.drop.setAttribute("cy", item.y);
+      item.drop.setAttribute("r", item.r);
+      item.anchor.setAttribute("r", item.r * .65);
+      moving ||= Math.abs(item.tx - item.x) + Math.abs(item.ty - item.y) + Math.abs(item.target - item.r) > .1;
+    }
+    if (moving) frame = requestAnimationFrame(tick);
+  }
+  const schedule = () => { if (frame === null) frame = requestAnimationFrame(tick); };
+  function reset() {
+    if (frame !== null) cancelAnimationFrame(frame);
+    frame = null;
+    for (const item of items) { item.r = item.target = 0; item.drop.setAttribute("r", "0"); item.anchor.setAttribute("r", "0"); }
+  }
+  document.addEventListener("pointermove", event => {
+    if (!finePointer.matches || motionPreference.matches || event.pointerType === "touch") return;
+    for (const item of items) {
+      const box = item.button.getBoundingClientRect();
+      const x = event.clientX - box.left, y = event.clientY - box.top;
+      const distance = Math.hypot(Math.max(-x, 0, x - box.width), Math.max(-y, 0, y - box.height));
+      item.target = distance < 52 && box.bottom > 0 && box.top < innerHeight ? 19 * (1 - distance / 65) : 0;
+      if (item.target) {
+        item.tx = x + 40;
+        item.ty = y + 40;
+        item.anchor.setAttribute("cx", Math.max(20, Math.min(box.width - 20, x)) + 40);
+        item.anchor.setAttribute("cy", Math.max(0, Math.min(box.height, y)) + 40);
+        if (item.r < .1) { item.x = item.tx; item.y = item.ty; }
+      }
+    }
+    schedule();
+  }, options);
+  document.documentElement.addEventListener("pointerleave", reset, options);
+  window.addEventListener("scroll", reset, options);
+  window.addEventListener("blur", reset, options);
+  document.addEventListener("visibilitychange", reset, options);
+  motionPreference.addEventListener("change", reset, options);
+  finePointer.addEventListener("change", reset, options);
+  return () => { reset(); controller.abort(); resize.disconnect(); };
 }
 
 const readingBlockSelector = ".hero, .summary, .experience, .project, .additional-work, .bottom-grid";
