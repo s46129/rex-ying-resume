@@ -76,18 +76,15 @@ const languageMeta = {
 const screenLabels = {
   en: {
     navigation: "Page sections", language: "Language", experience: "Experience", work: "Selected work", expertise: "Expertise",
-    print: "Print / PDF", primary: "Explore my work", secondary: "Get in touch", note: "Thoughtful systems. Playful experiences.",
-    footerLabel: "HAVE SOMETHING IN MIND?", footerTitle: "Let's build something.", footerNote: "Made with care, in Kaohsiung.", backTop: "Back to top",
+    print: "Print / PDF",
   },
   zh: {
     navigation: "頁面導覽", language: "語言", experience: "工作經歷", work: "精選作品", expertise: "專業技能",
-    print: "列印 / PDF", primary: "探索我的作品", secondary: "與我聯絡", note: "細緻的系統，生動的體驗。",
-    footerLabel: "有個想法想聊聊？", footerTitle: "一起打造新的體驗。", footerNote: "用心製作，來自高雄。", backTop: "回到頂端",
+    print: "列印 / PDF",
   },
   ja: {
     navigation: "ページ内ナビゲーション", language: "言語", experience: "職務経歴", work: "制作実績", expertise: "専門スキル",
-    print: "印刷 / PDF", primary: "制作実績を見る", secondary: "お問い合わせ", note: "丁寧な設計から、遊び心のある体験へ。",
-    footerLabel: "アイデアをお聞かせください", footerTitle: "新しい体験を、一緒に。", footerNote: "高雄から、心を込めて。", backTop: "トップに戻る",
+    print: "印刷 / PDF",
   },
 };
 
@@ -113,6 +110,7 @@ const revealObserver =
 let lightboxIndex = 0;
 let activeLanguage = "en";
 let scrollFrame = null;
+let disposeLiquidFrames = () => {};
 
 function renderResume(language, preservePosition = false) {
   const template = document.querySelector(`#resume-${language}`);
@@ -120,6 +118,7 @@ function renderResume(language, preservePosition = false) {
   if (!template) return;
 
   const position = preservePosition ? captureReadingPosition() : null;
+  disposeLiquidFrames();
   revealObserver?.disconnect();
   resume.replaceChildren(template.content.cloneNode(true));
   const meta = languageMeta[language];
@@ -134,6 +133,7 @@ function renderResume(language, preservePosition = false) {
   }
 
   decorateResume(screenLabels[language]);
+  disposeLiquidFrames = setupLiquidFrames();
 
   languageButtons.forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.language === language));
@@ -157,68 +157,23 @@ function renderResume(language, preservePosition = false) {
 
 function decorateResume(labels) {
   const hero = resume.querySelector(".hero");
-  const identity = hero.querySelector(".identity");
   hero.id = "top";
   resume.querySelector(".experience").id = "experience";
   resume.querySelector(".projects").id = "work";
   resume.querySelector(".bottom-grid").id = "expertise";
 
-  const index = document.createElement("p");
-  index.className = "hero-index screen-only";
-  index.textContent = "UNITY · XR · INTERACTIVE";
-  identity.prepend(index);
-
-  const note = document.createElement("p");
-  note.className = "hero-note screen-only";
-  note.textContent = labels.note;
-  identity.append(note);
-
-  const actions = document.createElement("div");
-  actions.className = "hero-actions screen-only";
-  for (const [className, href, label, arrow] of [
-    ["primary-link", "#work", labels.primary, "↗"],
-    ["secondary-link", "mailto:ted56129@gmail.com", labels.secondary, "↗"],
-  ]) {
-    const link = document.createElement("a");
-    link.className = className;
-    link.href = href;
-    link.textContent = label;
-    const icon = document.createElement("span");
-    icon.setAttribute("aria-hidden", "true");
-    icon.textContent = arrow;
-    link.append(icon);
-    actions.append(link);
-  }
-  identity.append(actions);
-
-  const art = document.createElement("div");
-  art.className = "hero-art screen-only";
-  art.setAttribute("aria-hidden", "true");
-  art.innerHTML = `
-    <div class="orbit-scene">
-      <div class="orbit-halo"></div>
-      <div class="orbit-ring orbit-ring-one"></div>
-      <div class="orbit-ring orbit-ring-two"></div>
-      <div class="orbit-ring orbit-ring-three"></div>
-      <div class="orbit-axis orbit-axis-x"></div>
-      <div class="orbit-axis orbit-axis-y"></div>
-      <div class="orbit-core"></div>
-      <div class="orbit-dot orbit-dot-one"></div>
-      <div class="orbit-dot orbit-dot-two"></div>
-    </div>
-    <div class="art-caption"><span>INTERACTIVE SYSTEMS</span><span>01 — ∞</span></div>`;
-  identity.after(art);
-
-  const numberedHeadings = [
-    ".summary .section-label", ".experience .section-heading", ".projects .section-heading",
-    ".additional-work .section-heading", ".bottom-grid > section:first-child .section-heading",
-    ".bottom-grid > section:last-child .section-heading",
-  ];
-  numberedHeadings.forEach((selector, index) => {
-    resume.querySelector(selector).dataset.sectionNumber = String(index + 1).padStart(2, "0");
-  });
   resume.querySelectorAll(".project").forEach((project, index) => {
-    project.dataset.projectNumber = String(index + 1).padStart(2, "0");
+    project.id = ["birdie-wing", "pili-universe", "monster-fruit"][index];
+  });
+  resume.querySelectorAll(".video-link").forEach((link) => {
+    const label = link.textContent;
+    link.setAttribute("aria-label", label);
+    link.title = label;
+    link.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7z" /></svg>';
+    const text = document.createElement("span");
+    text.className = "sr-only";
+    text.textContent = label;
+    link.append(text);
   });
 
   document.querySelector(".section-nav")?.setAttribute("aria-label", labels.navigation);
@@ -227,13 +182,81 @@ function decorateResume(labels) {
     const link = document.querySelector(`[data-nav="${key}"]`);
     if (link) link.textContent = labels[key];
   }
-  for (const [attribute, key] of [
-    ["print-label", "print"], ["footer-label", "footerLabel"], ["footer-title", "footerTitle"],
-    ["footer-note", "footerNote"], ["back-top", "backTop"],
-  ]) {
-    const label = document.querySelector(`[data-${attribute}]`);
-    if (label) label.textContent = labels[key];
+  printButton.setAttribute("aria-label", labels.print);
+  printButton.title = labels.print;
+}
+
+function setupLiquidFrames() {
+  if (!window.ResizeObserver) return () => {};
+  const controller = new AbortController();
+  const options = { signal: controller.signal, passive: true };
+  const finePointer = matchMedia("(hover: hover) and (pointer: fine)");
+  let frame = null;
+  const items = [...resume.querySelectorAll(".project .project-visual")].map((figure, index) => {
+    const button = figure.querySelector(".visual-trigger");
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.classList.add("liquid-frame", "screen-only");
+    svg.setAttribute("aria-hidden", "true");
+    const id = `liquid-${index}`;
+    svg.innerHTML = `<defs><filter id="${id}" x="-20%" y="-30%" width="140%" height="160%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="7"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/></filter></defs><rect x="33" y="33" rx="27"/><g filter="url(#${id})"><circle class="liquid-anchor" r="0"/><circle class="liquid-drop" r="0"/></g>`;
+    figure.prepend(svg);
+    return { figure, button, svg, rect: svg.querySelector("rect"), drop: svg.querySelector(".liquid-drop"), anchor: svg.querySelector(".liquid-anchor"), x: 40, y: 40, tx: 40, ty: 40, r: 0, target: 0 };
+  });
+  const resize = new ResizeObserver(() => {
+    for (const item of items) {
+      const { width, height } = item.button.getBoundingClientRect();
+      item.svg.setAttribute("width", width + 80);
+      item.svg.setAttribute("height", height + 80);
+      item.rect.setAttribute("width", width + 14);
+      item.rect.setAttribute("height", height + 14);
+    }
+  });
+  items.forEach(item => resize.observe(item.button));
+  function tick() {
+    frame = null;
+    let moving = false;
+    for (const item of items) {
+      item.x += (item.tx - item.x) * .23;
+      item.y += (item.ty - item.y) * .23;
+      item.r += (item.target - item.r) * .18;
+      item.drop.setAttribute("cx", item.x);
+      item.drop.setAttribute("cy", item.y);
+      item.drop.setAttribute("r", item.r);
+      item.anchor.setAttribute("r", item.r * .65);
+      moving ||= Math.abs(item.tx - item.x) + Math.abs(item.ty - item.y) + Math.abs(item.target - item.r) > .1;
+    }
+    if (moving) frame = requestAnimationFrame(tick);
   }
+  const schedule = () => { if (frame === null) frame = requestAnimationFrame(tick); };
+  function reset() {
+    if (frame !== null) cancelAnimationFrame(frame);
+    frame = null;
+    for (const item of items) { item.r = item.target = 0; item.drop.setAttribute("r", "0"); item.anchor.setAttribute("r", "0"); }
+  }
+  document.addEventListener("pointermove", event => {
+    if (!finePointer.matches || motionPreference.matches || event.pointerType === "touch") return;
+    for (const item of items) {
+      const box = item.button.getBoundingClientRect();
+      const x = event.clientX - box.left, y = event.clientY - box.top;
+      const distance = Math.hypot(Math.max(-x, 0, x - box.width), Math.max(-y, 0, y - box.height));
+      item.target = distance < 52 && box.bottom > 0 && box.top < innerHeight ? 19 * (1 - distance / 65) : 0;
+      if (item.target) {
+        item.tx = x + 40;
+        item.ty = y + 40;
+        item.anchor.setAttribute("cx", Math.max(20, Math.min(box.width - 20, x)) + 40);
+        item.anchor.setAttribute("cy", Math.max(0, Math.min(box.height, y)) + 40);
+        if (item.r < .1) { item.x = item.tx; item.y = item.ty; }
+      }
+    }
+    schedule();
+  }, options);
+  document.documentElement.addEventListener("pointerleave", reset, options);
+  window.addEventListener("scroll", reset, options);
+  window.addEventListener("blur", reset, options);
+  document.addEventListener("visibilitychange", reset, options);
+  motionPreference.addEventListener("change", reset, options);
+  finePointer.addEventListener("change", reset, options);
+  return () => { reset(); controller.abort(); resize.disconnect(); };
 }
 
 const readingBlockSelector = ".hero, .summary, .experience, .project, .additional-work, .bottom-grid";
